@@ -8,7 +8,9 @@
       "Bash(brew install:*)",
       "Bash(git remote set-url:*)",
       "Bash(ssh-keygen:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(python3:*)",
+      "Bash(pip3 install:*)"
     ]
   }
 }
