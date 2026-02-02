@@ -1135,54 +1135,68 @@ img {
 
 /* Floating cards always visible - no scroll fade */
 
-/* ==================== SOCIAL PROOF TICKER ==================== */
-/* Universal marquee animation for all carousels */
-@keyframes marquee {
-  0% {
+/* ==================== MARQUEE CAROUSEL SYSTEM ==================== */
+/* Single animation keyframe - used by all carousels */
+@keyframes marquee-scroll {
+  from {
     transform: translateX(0);
   }
-  100% {
+  to {
     transform: translateX(-50%);
   }
 }
 
-@keyframes marquee-reverse {
-  0% {
-    transform: translateX(-50%);
-  }
-  100% {
-    transform: translateX(0);
-  }
+/* Base marquee container */
+.marquee {
+  overflow: hidden;
+  width: 100%;
 }
 
-/* Single ticker (stats only) */
-.ticker-single {
+/* Inner track that animates */
+.marquee-inner {
+  display: flex;
+  width: fit-content;
+  animation: marquee-scroll var(--duration) linear infinite;
+  will-change: transform;
+}
+
+/* Reverse direction */
+.marquee-inner.reverse {
+  animation-direction: reverse;
+}
+
+/* Content wrapper - holds items, duplicated for seamless loop */
+.marquee-content {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ==================== TICKER SECTION ==================== */
+.ticker-section {
   background: var(--bg-secondary);
   border-top: var(--border-subtle);
   border-bottom: var(--border-subtle);
-  overflow: hidden;
-  padding: 0.5rem 0;
+  padding: 0.75rem 0;
 }
 
-.ticker-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 25s linear infinite;
-  will-change: transform;
+.ticker-section .marquee-content {
+  gap: 0;
 }
 
 .ticker-item {
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
-  color: var(--text-secondary);
+  color: var(--accent-blue);
   font-family: 'Space Grotesk', sans-serif;
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   white-space: nowrap;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
 }
 
 .ticker-item::after {
@@ -1191,13 +1205,8 @@ img {
   height: 5px;
   background: var(--accent-blue);
   border-radius: 50%;
-  margin-left: 1rem;
+  margin-left: 1.5rem;
   flex-shrink: 0;
-}
-
-.ticker-stat {
-  color: var(--accent-blue) !important;
-  font-weight: 600 !important;
 }
 
 /* ==================== SECTIONS ==================== */
@@ -1206,12 +1215,12 @@ section {
 }
 
 /* Specific tight sections */
-.ticker-dual {
-  padding: 0;
+.ticker-section {
+  padding: 0.75rem 0;
 }
 
-.results-carousel {
-  padding: 2rem 0;
+.results-marquee {
+  padding: 1rem 0;
 }
 
 .section-header {
@@ -1342,17 +1351,8 @@ section {
   margin-bottom: 2rem;
 }
 
-.clients-carousel {
-  overflow: hidden;
-  padding: 1rem 0;
-}
-
-.clients-track {
-  display: flex;
-  width: max-content;
+.clients-content {
   gap: 1.5rem;
-  animation: marquee 30s linear infinite;
-  will-change: transform;
 }
 
 .client-photo-card {
@@ -1418,9 +1418,8 @@ section {
     height: 150px;
   }
 
-  .clients-track {
+  .clients-content {
     gap: 1rem;
-    animation-duration: 18s;
   }
 
   .client-photo-name {
@@ -1429,17 +1428,8 @@ section {
 }
 
 /* ==================== RESULTS CAROUSEL ==================== */
-.results-carousel {
-  overflow: hidden;
-  padding: 1.5rem 0;
-}
-
-.results-track {
-  display: flex;
-  width: max-content;
+.results-content {
   gap: 1rem;
-  animation: marquee 20s linear infinite;
-  will-change: transform;
 }
 
 .result-card {
@@ -1463,15 +1453,6 @@ section {
   height: auto;
   max-height: 300px;
   object-fit: contain;
-}
-
-/* Dual direction carousels */
-.results-track.results-right {
-  animation: marquee 22s linear infinite;
-}
-
-.results-track.results-left {
-  animation: marquee-reverse 20s linear infinite;
 }
 
 /* ==================== RESULTS GALLERY (Full page) ==================== */
@@ -2011,12 +1992,16 @@ section {
   }
 
   /* Faster carousels on mobile */
-  .results-track.results-right {
-    animation-duration: 12s;
+  .results-marquee .marquee-inner {
+    --duration: 20s;
   }
 
-  .results-track.results-left {
-    animation-duration: 11s;
+  .clients-carousel-section .marquee-inner {
+    --duration: 18s;
+  }
+
+  .ticker-section .marquee-inner {
+    --duration: 15s;
   }
 
   .hero-content {
