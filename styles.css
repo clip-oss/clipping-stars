@@ -1474,7 +1474,7 @@ section {
 
 .results-track {
   display: flex;
-  animation: resultsScroll 50s linear infinite;
+  animation: scrollResults 45s linear infinite;
 }
 
 .results-track.reverse {
@@ -1482,13 +1482,12 @@ section {
 }
 
 .result-card {
-  flex: 0 0 auto;
-  width: 160px;
-  height: 280px;
+  width: 180px;
+  height: 320px;
   margin-right: 20px;
   border-radius: 12px;
   overflow: hidden;
-  background: #111;
+  flex-shrink: 0;
 }
 
 .result-card img {
@@ -1496,12 +1495,11 @@ section {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  display: block;
 }
 
-@keyframes resultsScroll {
+@keyframes scrollResults {
   0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-160px * 6 - 20px * 6)); }
+  100% { transform: translateX(-50%); }
 }
 
 .see-all-link {
@@ -2110,18 +2108,13 @@ section {
 
   /* Results carousel smaller on mobile */
   .result-card {
-    width: 120px;
-    height: 210px;
-    margin-right: 12px;
+    width: 140px;
+    height: 250px;
+    margin-right: 16px;
   }
 
   .results-section h2 {
     font-size: 24px;
-  }
-
-  @keyframes resultsScroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-120px * 6 - 12px * 6)); }
   }
 
   /* Results page 1 column on mobile */
@@ -2242,14 +2235,11 @@ section {
     font-size: 0.65rem;
   }
 
-  /* Even smaller result cards */
+  /* Smaller result cards on small mobile */
   .result-card {
-    width: 180px;
-    max-height: 220px;
-  }
-
-  .result-card img {
-    max-height: 220px;
+    width: 120px;
+    height: 210px;
+    margin-right: 12px;
   }
 
   .client-card {
