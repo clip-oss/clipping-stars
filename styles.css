@@ -942,36 +942,59 @@ img {
     padding: 6rem 0 2rem;
   }
 
-  /* Floating cards as faint background texture only */
+  /* Floating cards as visible background decoration */
   .floating-cards {
-    z-index: -1;
+    z-index: 1;
     pointer-events: none;
   }
 
-  /* Hide all floating cards by default */
+  /* Hide all floating cards by default on mobile */
   .floating-card {
-    display: none;
-  }
-
-  /* Show only 2-3 small, very faded cards as background decoration */
-  .floating-card.card-md {
-    display: block;
-    width: 80px;
-    opacity: 0.1 !important;
-    z-index: -1;
-  }
-
-  .floating-card.card-sm {
-    display: block;
-    width: 60px;
-    opacity: 0.1 !important;
-    z-index: -1;
-  }
-
-  /* Hide the large featured screenshots on mobile - too big */
-  .floating-card.card-featured,
-  .floating-card.card-featured-secondary {
     display: none !important;
+  }
+
+  /* Show YouTube screenshot top right - partially cut off by edge */
+  .floating-card.card-featured {
+    display: block !important;
+    position: absolute;
+    width: 180px !important;
+    opacity: 0.45 !important;
+    top: 8% !important;
+    left: auto !important;
+    right: -30px !important;
+    transform: rotate(8deg) !important;
+    z-index: 1;
+    animation: none !important;
+  }
+
+  /* Show Instagram screenshot bottom left - partially visible */
+  .floating-card.card-featured-secondary {
+    display: block !important;
+    position: absolute;
+    width: 160px !important;
+    opacity: 0.4 !important;
+    top: auto !important;
+    bottom: 15% !important;
+    left: -25px !important;
+    right: auto !important;
+    transform: rotate(-6deg) !important;
+    z-index: 1;
+    animation: none !important;
+  }
+
+  /* Show one more screenshot bottom right */
+  .floating-card.card-md:first-of-type {
+    display: block !important;
+    position: absolute;
+    width: 120px !important;
+    opacity: 0.35 !important;
+    top: auto !important;
+    bottom: 22% !important;
+    left: auto !important;
+    right: 5% !important;
+    transform: rotate(5deg) !important;
+    z-index: 1;
+    animation: none !important;
   }
 
   /* Hide ALL stat bubbles on mobile - they overlap text */
@@ -999,6 +1022,25 @@ img {
     display: none;
   }
 
+  /* Counter with blue glow background */
+  .live-counter {
+    position: relative;
+    z-index: 10;
+  }
+
+  .live-counter::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    height: 120px;
+    background: radial-gradient(ellipse, rgba(0, 100, 200, 0.25) 0%, rgba(0, 60, 140, 0.1) 40%, transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+  }
+
   .counter-number {
     font-size: 2.2rem;
   }
@@ -1007,26 +1049,25 @@ img {
     font-size: 0.85rem;
   }
 
+  /* Headline with text shadow for readability */
   .hero-dashboard h1 {
     font-size: 1.8rem;
     position: relative;
     z-index: 10;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8), 0 4px 40px rgba(0, 0, 0, 0.6);
   }
 
+  /* Subtitle with text shadow */
   .hero-subtitle {
     font-size: 1rem;
     padding: 0 1rem;
     position: relative;
     z-index: 10;
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.8);
   }
 
   /* Ensure all dashboard content is above background decorations */
   .dashboard-content {
-    position: relative;
-    z-index: 10;
-  }
-
-  .live-counter {
     position: relative;
     z-index: 10;
   }
