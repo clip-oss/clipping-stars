@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initLazyLoading();
   initSmoothPageTransition();
   initCarouselClickPause();
+  initLiveCounter();
+  initDashboardParallax();
 });
 
 // ==================== NAVBAR ====================
@@ -237,6 +239,85 @@ function initParallax() {
 // Initialize parallax if hero bg exists
 if (document.querySelector('.hero-bg')) {
   initParallax();
+}
+
+// ==================== LIVE COUNTER ====================
+function initLiveCounter() {
+  const counter = document.getElementById('live-view-counter');
+  if (!counter) return;
+
+  let currentValue = 4600000000;
+
+  // Format number with commas
+  function formatNumber(num) {
+    return num.toLocaleString('en-US');
+  }
+
+  // Update counter with random increment
+  function tickCounter() {
+    const increment = Math.floor(Math.random() * 50) + 1; // Random 1-50
+    currentValue += increment;
+    counter.textContent = formatNumber(currentValue);
+  }
+
+  // Tick every 200-500ms randomly
+  function scheduleNextTick() {
+    const delay = Math.floor(Math.random() * 300) + 200; // 200-500ms
+    setTimeout(() => {
+      tickCounter();
+      scheduleNextTick();
+    }, delay);
+  }
+
+  // Set initial value
+  counter.textContent = formatNumber(currentValue);
+
+  // Start ticking after a short delay
+  setTimeout(scheduleNextTick, 1000);
+}
+
+// ==================== DASHBOARD PARALLAX ====================
+function initDashboardParallax() {
+  const dashboard = document.getElementById('hero-dashboard');
+  const floatingCards = document.getElementById('floating-cards');
+  const statBubbles = document.getElementById('stat-bubbles');
+
+  if (!dashboard) return;
+
+  let ticking = false;
+
+  function updateParallax() {
+    const scrolled = window.pageYOffset;
+    const heroHeight = dashboard.offsetHeight;
+    const scrollProgress = Math.min(scrolled / (heroHeight * 0.5), 1);
+
+    // Fade out floating elements as user scrolls
+    if (floatingCards) {
+      floatingCards.style.opacity = 1 - scrollProgress;
+      floatingCards.style.transform = `translateY(${-scrolled * 0.3}px)`;
+    }
+
+    if (statBubbles) {
+      statBubbles.style.opacity = 1 - scrollProgress;
+      statBubbles.style.transform = `translateY(${-scrolled * 0.2}px)`;
+    }
+
+    // Add scrolled class for CSS transitions
+    if (scrollProgress > 0.3) {
+      dashboard.classList.add('scrolled');
+    } else {
+      dashboard.classList.remove('scrolled');
+    }
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  });
 }
 
 // ==================== UTILITY FUNCTIONS ====================

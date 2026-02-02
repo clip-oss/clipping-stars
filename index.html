@@ -46,44 +46,84 @@
     <a href="#apply" class="btn btn-primary">Apply Now</a>
   </div>
 
-  <!-- Hero Section -->
-  <section class="hero hero-gradient">
-    <div class="hero-overlay-gradient"></div>
-    <div class="container">
-      <div class="hero-split">
-        <div class="hero-content">
-          <h1 class="fade-in">We Don't Just Clip.<br><span class="gradient-text">We Dominate.</span></h1>
-          <p class="fade-in stagger-1">The #1 short-form clipping agency trusted by the biggest names on the internet.</p>
-          <div class="hero-cta fade-in stagger-2">
-            <a href="#apply" class="btn btn-primary btn-large">Apply Now</a>
-            <a href="#results-preview" class="link-arrow">See Our Results <span>&rarr;</span></a>
-          </div>
-          <div class="stats-bar fade-in stagger-3">
-            <div class="stat-item">
-              <div class="stat-number" data-count="4600000000" data-suffix="+">0</div>
-              <div class="stat-label">Total Views Generated</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number" data-count="150" data-suffix="+">0</div>
-              <div class="stat-label">Team Members</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number" data-count="50" data-suffix="+">0</div>
-              <div class="stat-label">Clients Served</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-number" data-count="11" data-suffix="">0</div>
-              <div class="stat-label">Platforms Covered</div>
-            </div>
-          </div>
-        </div>
-        <div class="hero-proof fade-in stagger-2">
-          <div class="proof-card">
-            <img src="assets/results/yt_184m_views.jpg" alt="184M YouTube Views - Real Proof" loading="eager">
-            <div class="proof-label">184M Views on ONE YouTube Channel</div>
-          </div>
-        </div>
+  <!-- Hero Section - Animated Dashboard -->
+  <section class="hero-dashboard" id="hero-dashboard">
+    <!-- Grid Pattern Background -->
+    <div class="dashboard-grid"></div>
+
+    <!-- Animated Growth Line SVG -->
+    <svg class="growth-line" viewBox="0 0 1200 400" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#00A3FF;stop-opacity:0" />
+          <stop offset="50%" style="stop-color:#00A3FF;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#7B2FFF;stop-opacity:0" />
+        </linearGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <path class="growth-path" d="M0,350 Q200,320 400,280 T800,180 T1200,50" fill="none" stroke="url(#lineGradient)" stroke-width="2" filter="url(#glow)"/>
+    </svg>
+
+    <!-- Floating Proof Cards -->
+    <div class="floating-cards" id="floating-cards">
+      <div class="floating-card" style="--delay: 0s; --x: 5%; --y: 15%; --rotate: -5deg;">
+        <img src="assets/results/yt_184m_views.jpg" alt="184M Views" loading="eager">
       </div>
+      <div class="floating-card" style="--delay: 0.5s; --x: 75%; --y: 10%; --rotate: 4deg;">
+        <img src="assets/results/ig_88m_spike.jpeg" alt="88M Spike" loading="eager">
+      </div>
+      <div class="floating-card" style="--delay: 1s; --x: 85%; --y: 55%; --rotate: -3deg;">
+        <img src="assets/results/tiktok_17m_viral.png" alt="17M Viral" loading="eager">
+      </div>
+      <div class="floating-card" style="--delay: 1.5s; --x: 3%; --y: 60%; --rotate: 5deg;">
+        <img src="assets/results/ig_27m_reel.png" alt="27M Reel" loading="eager">
+      </div>
+      <div class="floating-card" style="--delay: 2s; --x: 65%; --y: 70%; --rotate: -2deg;">
+        <img src="assets/results/tiktok_40m_views.png" alt="40M Views" loading="eager">
+      </div>
+      <div class="floating-card mobile-hide" style="--delay: 2.5s; --x: 20%; --y: 75%; --rotate: 3deg;">
+        <img src="assets/results/ig_88m_90days.jpeg" alt="88M in 90 Days" loading="eager">
+      </div>
+    </div>
+
+    <!-- Floating Stat Bubbles -->
+    <div class="stat-bubbles" id="stat-bubbles">
+      <span class="stat-bubble" style="--duration: 25s; --start-x: -10%; --end-x: 110%; --y: 20%;">+17.3M</span>
+      <span class="stat-bubble" style="--duration: 30s; --start-x: 110%; --end-x: -10%; --y: 40%;">+88M</span>
+      <span class="stat-bubble" style="--duration: 22s; --start-x: -10%; --end-x: 110%; --y: 65%;">+184M</span>
+      <span class="stat-bubble" style="--duration: 28s; --start-x: 110%; --end-x: -10%; --y: 80%;">+2B</span>
+      <span class="stat-bubble viral" style="--duration: 35s; --start-x: -10%; --end-x: 110%; --y: 50%;">VIRAL</span>
+    </div>
+
+    <!-- Main Content -->
+    <div class="dashboard-content">
+      <!-- Live Counter -->
+      <div class="live-counter fade-in">
+        <div class="counter-number" id="live-view-counter">4,600,000,000</div>
+        <div class="counter-label">Total Views Generated — and counting.</div>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="fade-in stagger-1">We Don't Just Clip.<br><span class="gradient-text">We Dominate.</span></h1>
+      <p class="hero-subtitle fade-in stagger-2">The #1 short-form clipping agency trusted by the biggest names on the internet.</p>
+
+      <!-- CTA -->
+      <div class="hero-cta fade-in stagger-3">
+        <a href="#apply" class="btn btn-primary btn-large">Apply Now</a>
+        <a href="#results-preview" class="link-arrow">See Our Results <span>&rarr;</span></a>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator fade-in stagger-4">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
     </div>
   </section>
 
