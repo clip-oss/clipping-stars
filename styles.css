@@ -1460,24 +1460,23 @@ section {
 }
 
 .result-card {
-  flex-shrink: 0;
-  width: 180px;
-  min-width: 180px;
-  max-width: 180px;
-  height: 320px;
-  min-height: 320px;
-  max-height: 320px;
+  width: 280px;
+  height: 500px;
+  min-width: 280px;
+  min-height: 500px;
+  max-width: 280px;
+  max-height: 500px;
   margin-right: 20px;
-  background: #111;
-  border: 1px solid var(--glass-border);
   border-radius: 12px;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .result-card img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  background: #111;
 }
 
 /* ==================== RESULTS GALLERY (Full page) ==================== */
@@ -2071,14 +2070,15 @@ section {
     height: 200px;
   }
 
-  /* Results carousel smaller on mobile - fixed dimensions */
+  /* Results carousel smaller on mobile - fixed dimensions, same aspect ratio */
   .result-card {
-    width: 140px;
-    min-width: 140px;
-    max-width: 140px;
-    height: 250px;
-    min-height: 250px;
-    max-height: 250px;
+    width: 180px;
+    min-width: 180px;
+    max-width: 180px;
+    height: 320px;
+    min-height: 320px;
+    max-height: 320px;
+    margin-right: 16px;
   }
 
   /* Faster carousels on mobile (2x speed) */
