@@ -246,18 +246,44 @@ function initLiveCounter() {
   const counter = document.getElementById('live-view-counter');
   if (!counter) return;
 
-  let currentValue = 4600000000;
+  const STORAGE_KEY = 'clippingstars_view_count';
+  const TIMESTAMP_KEY = 'clippingstars_count_timestamp';
+  const BASE_VALUE = 4600000000;
+  const VIEWS_PER_SECOND = 15; // Average views generated per second
 
   // Format number with commas
   function formatNumber(num) {
-    return num.toLocaleString('en-US');
+    return Math.floor(num).toLocaleString('en-US');
   }
+
+  // Get stored value or calculate based on elapsed time
+  function getStoredValue() {
+    const storedValue = sessionStorage.getItem(STORAGE_KEY);
+    const storedTimestamp = sessionStorage.getItem(TIMESTAMP_KEY);
+
+    if (storedValue && storedTimestamp) {
+      const elapsed = (Date.now() - parseInt(storedTimestamp)) / 1000; // seconds
+      const additionalViews = Math.floor(elapsed * VIEWS_PER_SECOND);
+      return parseInt(storedValue) + additionalViews;
+    }
+
+    return BASE_VALUE;
+  }
+
+  // Save current value to sessionStorage
+  function saveValue(value) {
+    sessionStorage.setItem(STORAGE_KEY, value.toString());
+    sessionStorage.setItem(TIMESTAMP_KEY, Date.now().toString());
+  }
+
+  let currentValue = getStoredValue();
 
   // Update counter with random increment
   function tickCounter() {
     const increment = Math.floor(Math.random() * 50) + 1; // Random 1-50
     currentValue += increment;
     counter.textContent = formatNumber(currentValue);
+    saveValue(currentValue);
   }
 
   // Tick every 200-500ms randomly
@@ -271,9 +297,10 @@ function initLiveCounter() {
 
   // Set initial value
   counter.textContent = formatNumber(currentValue);
+  saveValue(currentValue);
 
   // Start ticking after a short delay
-  setTimeout(scheduleNextTick, 1000);
+  setTimeout(scheduleNextTick, 500);
 }
 
 // ==================== DASHBOARD PARALLAX ====================

@@ -827,17 +827,70 @@ img {
   }
 }
 
+/* Featured Proof Card (Large YouTube screenshot) */
+.hero-proof-featured {
+  position: absolute;
+  left: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.proof-card-large {
+  width: 320px;
+  background: var(--bg-card);
+  border: 1px solid rgba(0, 163, 255, 0.3);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 163, 255, 0.2);
+  animation: floatLarge 8s ease-in-out infinite;
+}
+
+.proof-card-large img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.proof-card-label {
+  padding: 0.75rem 1rem;
+  background: rgba(0, 163, 255, 0.1);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+  text-align: center;
+}
+
+@keyframes floatLarge {
+  0%, 100% {
+    transform: translateY(-50%) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(calc(-50% - 15px)) rotate(-2deg);
+  }
+}
+
 /* Parallax scroll fade effect */
 .hero-dashboard.scrolled .floating-cards,
-.hero-dashboard.scrolled .stat-bubbles {
+.hero-dashboard.scrolled .stat-bubbles,
+.hero-dashboard.scrolled .hero-proof-featured {
   opacity: 0;
   transform: translateY(-50px);
   transition: all 0.5s ease;
 }
 
+/* Mobile: hide featured proof card */
+@media (max-width: 1024px) {
+  .hero-proof-featured {
+    display: none;
+  }
+}
+
 /* ==================== SOCIAL PROOF TICKER ==================== */
 .ticker {
-  padding: 2rem 0;
+  padding: 1.5rem 0;
   background: var(--bg-secondary);
   overflow: hidden;
   border-top: var(--border-subtle);
@@ -846,18 +899,18 @@ img {
 
 .ticker-track {
   display: flex;
+  width: max-content;
   animation: ticker 30s linear infinite;
 }
 
 .ticker-content {
   display: flex;
   align-items: center;
-  white-space: nowrap;
-  padding-right: 2rem;
+  flex-shrink: 0;
 }
 
 .ticker-item {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   color: var(--text-secondary);
   font-family: 'Space Grotesk', sans-serif;
@@ -865,15 +918,18 @@ img {
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  white-space: nowrap;
+  padding: 0 1rem;
 }
 
 .ticker-item::after {
   content: '';
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   background: var(--accent-blue);
   border-radius: 50%;
-  margin: 0 2rem;
+  margin-left: 1rem;
+  flex-shrink: 0;
 }
 
 @keyframes ticker {
@@ -903,7 +959,7 @@ img {
 }
 
 .ticker-row {
-  padding: 1rem 0;
+  padding: 0.75rem 0;
   overflow: hidden;
 }
 
@@ -913,14 +969,20 @@ img {
 
 .ticker-dual .ticker-track {
   display: flex;
+  width: max-content;
+}
+
+.ticker-dual .ticker-content {
+  display: flex;
+  flex-shrink: 0;
 }
 
 .ticker-dual .ticker-right {
-  animation: ticker 25s linear infinite;
+  animation: ticker 20s linear infinite;
 }
 
 .ticker-dual .ticker-left {
-  animation: ticker-reverse 20s linear infinite;
+  animation: ticker-reverse 18s linear infinite;
 }
 
 .ticker-stat {
@@ -1054,13 +1116,14 @@ section {
 /* ==================== RESULTS CAROUSEL ==================== */
 .results-carousel {
   overflow: hidden;
-  padding: 2rem 0;
+  padding: 1rem 0;
 }
 
 .results-track {
   display: flex;
-  gap: 1.5rem;
-  animation: scroll-results 15s linear infinite;
+  width: max-content;
+  gap: 1rem;
+  animation: scroll-results 25s linear infinite;
 }
 
 .results-carousel.paused .results-track {
@@ -1069,11 +1132,11 @@ section {
 
 .result-card {
   flex-shrink: 0;
-  width: 280px;
-  max-height: 350px;
+  width: 240px;
+  max-height: 300px;
   background: var(--bg-card);
   border: 1px solid var(--glass-border);
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
   transition: var(--transition-medium);
 }
@@ -1086,7 +1149,7 @@ section {
 .result-card img {
   width: 100%;
   height: auto;
-  max-height: 350px;
+  max-height: 300px;
   object-fit: contain;
 }
 
@@ -1110,11 +1173,11 @@ section {
 
 /* Dual direction carousels */
 .results-track.results-right {
-  animation: scroll-results 20s linear infinite;
+  animation: scroll-results 30s linear infinite;
 }
 
 .results-track.results-left {
-  animation: scroll-results-reverse 18s linear infinite;
+  animation: scroll-results-reverse 28s linear infinite;
 }
 
 /* ==================== RESULTS GALLERY (Full page) ==================== */
