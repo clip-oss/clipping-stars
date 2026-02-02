@@ -1,16 +1,16 @@
-// ClippingStars Main JavaScript
+// ClippingStars Main JavaScript - Optimized
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize all functionality
   initNavbar();
   initMobileMenu();
   initScrollAnimations();
-  initCounterAnimations();
-  initLazyLoading();
   initSmoothPageTransition();
-  initCarouselClickPause();
   initLiveCounter();
-  initDashboardParallax();
+
+  // Only init parallax on desktop
+  if (window.innerWidth > 768) {
+    initDashboardParallax();
+  }
 });
 
 // ==================== NAVBAR ====================
@@ -18,20 +18,21 @@ function initNavbar() {
   const navbar = document.querySelector('.navbar');
   if (!navbar) return;
 
-  let lastScroll = 0;
+  let ticking = false;
 
   window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-
-    // Add/remove scrolled class
-    if (currentScroll > 50) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        if (window.pageYOffset > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+        ticking = false;
+      });
+      ticking = true;
     }
-
-    lastScroll = currentScroll;
-  });
+  }, { passive: true });
 }
 
 // ==================== MOBILE MENU ====================
@@ -48,7 +49,6 @@ function initMobileMenu() {
     document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
   });
 
-  // Close menu when clicking a link
   mobileLinks.forEach(link => {
     link.addEventListener('click', () => {
       menuToggle.classList.remove('active');
@@ -59,88 +59,62 @@ function initMobileMenu() {
 }
 
 // ==================== SCROLL ANIMATIONS ====================
+// Single IntersectionObserver for all animated elements
 function initScrollAnimations() {
-  const animatedElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .timeline-item, .result-item');
+  const animatedElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .timeline-item, .result-item, [data-count]');
 
   if (!animatedElements.length) return;
-
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px 0px -100px 0px',
-    threshold: 0.1
-  };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        // Optionally stop observing after animation
-        // observer.unobserve(entry.target);
+
+        // Handle counter animation
+        if (entry.target.hasAttribute('data-count') && !entry.target.classList.contains('counted')) {
+          animateCounter(entry.target);
+          entry.target.classList.add('counted');
+        }
+
+        // Unobserve after animation triggers
+        observer.unobserve(entry.target);
       }
     });
-  }, observerOptions);
-
-  animatedElements.forEach(el => {
-    observer.observe(el);
+  }, {
+    root: null,
+    rootMargin: '0px 0px -50px 0px',
+    threshold: 0.1
   });
+
+  animatedElements.forEach(el => observer.observe(el));
 }
 
 // ==================== COUNTER ANIMATIONS ====================
-function initCounterAnimations() {
-  const counters = document.querySelectorAll('[data-count]');
-
-  if (!counters.length) return;
-
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.5
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-        animateCounter(entry.target);
-        entry.target.classList.add('counted');
-      }
-    });
-  }, observerOptions);
-
-  counters.forEach(counter => {
-    observer.observe(counter);
-  });
-}
-
 function animateCounter(element) {
   const target = parseFloat(element.getAttribute('data-count'));
   const suffix = element.getAttribute('data-suffix') || '';
-  const duration = 2000; // 2 seconds
-  const frameDuration = 1000 / 60; // 60fps
-  const totalFrames = Math.round(duration / frameDuration);
-  let frame = 0;
+  const duration = 2000;
+  const startTime = performance.now();
 
-  const easeOutQuad = t => t * (2 - t);
-
-  const counter = setInterval(() => {
-    frame++;
-    const progress = easeOutQuad(frame / totalFrames);
-    const currentCount = Math.round(target * progress * 10) / 10;
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = progress * (2 - progress); // easeOutQuad
+    const currentCount = target * eased;
 
     if (target >= 1000000000) {
-      // Billions
       element.textContent = (currentCount / 1000000000).toFixed(1) + 'B' + suffix;
     } else if (target >= 1000000) {
-      // Millions
       element.textContent = (currentCount / 1000000).toFixed(1) + 'M' + suffix;
     } else if (target >= 1000) {
-      // Thousands
       element.textContent = (currentCount / 1000).toFixed(0) + 'K' + suffix;
     } else {
       element.textContent = Math.round(currentCount) + suffix;
     }
 
-    if (frame === totalFrames) {
-      clearInterval(counter);
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
       // Set final value
       if (target >= 1000000000) {
         element.textContent = (target / 1000000000).toFixed(1) + 'B' + suffix;
@@ -152,48 +126,17 @@ function animateCounter(element) {
         element.textContent = target + suffix;
       }
     }
-  }, frameDuration);
-}
-
-// ==================== LAZY LOADING IMAGES ====================
-function initLazyLoading() {
-  const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-
-  if (!lazyImages.length) return;
-
-  if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          img.classList.add('loaded');
-          imageObserver.unobserve(img);
-        }
-      });
-    });
-
-    lazyImages.forEach(img => {
-      img.addEventListener('load', () => {
-        img.classList.add('loaded');
-      });
-      imageObserver.observe(img);
-    });
-  } else {
-    // Fallback for browsers without IntersectionObserver
-    lazyImages.forEach(img => {
-      img.classList.add('loaded');
-    });
   }
+
+  requestAnimationFrame(update);
 }
 
 // ==================== SMOOTH PAGE TRANSITIONS ====================
 function initSmoothPageTransition() {
-  // Add fade-out class on navigation
   const links = document.querySelectorAll('a[href$=".html"]');
 
   links.forEach(link => {
     link.addEventListener('click', (e) => {
-      // Only handle internal links
       if (link.hostname === window.location.hostname) {
         e.preventDefault();
         document.body.style.opacity = '0';
@@ -206,39 +149,11 @@ function initSmoothPageTransition() {
     });
   });
 
-  // Fade in on page load
   document.body.style.opacity = '0';
   requestAnimationFrame(() => {
     document.body.style.transition = 'opacity 0.3s ease';
     document.body.style.opacity = '1';
   });
-}
-
-// ==================== CAROUSEL CLICK TO PAUSE ====================
-function initCarouselClickPause() {
-  const carousel = document.getElementById('results-carousel');
-  if (!carousel) return;
-
-  carousel.addEventListener('click', () => {
-    carousel.classList.toggle('paused');
-  });
-}
-
-// ==================== PARALLAX EFFECT ====================
-function initParallax() {
-  const parallaxBg = document.querySelector('.hero-bg');
-
-  if (!parallaxBg) return;
-
-  window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    parallaxBg.style.transform = `translateY(${scrolled * 0.5}px)`;
-  });
-}
-
-// Initialize parallax if hero bg exists
-if (document.querySelector('.hero-bg')) {
-  initParallax();
 }
 
 // ==================== LIVE COUNTER ====================
@@ -249,20 +164,18 @@ function initLiveCounter() {
   const STORAGE_KEY = 'clippingstars_view_count';
   const TIMESTAMP_KEY = 'clippingstars_count_timestamp';
   const BASE_VALUE = 4600000000;
-  const VIEWS_PER_SECOND = 15; // Average views generated per second
+  const VIEWS_PER_SECOND = 15;
 
-  // Format number with commas
   function formatNumber(num) {
     return Math.floor(num).toLocaleString('en-US');
   }
 
-  // Get stored value or calculate based on elapsed time
   function getStoredValue() {
     const storedValue = sessionStorage.getItem(STORAGE_KEY);
     const storedTimestamp = sessionStorage.getItem(TIMESTAMP_KEY);
 
     if (storedValue && storedTimestamp) {
-      const elapsed = (Date.now() - parseInt(storedTimestamp)) / 1000; // seconds
+      const elapsed = (Date.now() - parseInt(storedTimestamp)) / 1000;
       const additionalViews = Math.floor(elapsed * VIEWS_PER_SECOND);
       return parseInt(storedValue) + additionalViews;
     }
@@ -270,40 +183,41 @@ function initLiveCounter() {
     return BASE_VALUE;
   }
 
-  // Save current value to sessionStorage
   function saveValue(value) {
     sessionStorage.setItem(STORAGE_KEY, value.toString());
     sessionStorage.setItem(TIMESTAMP_KEY, Date.now().toString());
   }
 
   let currentValue = getStoredValue();
+  let timeoutId = null;
 
-  // Update counter with random increment
   function tickCounter() {
-    const increment = Math.floor(Math.random() * 50) + 1; // Random 1-50
+    const increment = Math.floor(Math.random() * 50) + 1;
     currentValue += increment;
     counter.textContent = formatNumber(currentValue);
     saveValue(currentValue);
   }
 
-  // Tick every 200-500ms randomly
   function scheduleNextTick() {
-    const delay = Math.floor(Math.random() * 300) + 200; // 200-500ms
-    setTimeout(() => {
+    const delay = Math.floor(Math.random() * 300) + 200;
+    timeoutId = setTimeout(() => {
       tickCounter();
       scheduleNextTick();
     }, delay);
   }
 
-  // Set initial value
   counter.textContent = formatNumber(currentValue);
   saveValue(currentValue);
 
-  // Start ticking after a short delay
   setTimeout(scheduleNextTick, 500);
+
+  // Cleanup on page unload
+  window.addEventListener('beforeunload', () => {
+    if (timeoutId) clearTimeout(timeoutId);
+  });
 }
 
-// ==================== DASHBOARD PARALLAX ====================
+// ==================== DASHBOARD PARALLAX (Desktop Only) ====================
 function initDashboardParallax() {
   const dashboard = document.getElementById('hero-dashboard');
   const floatingCards = document.getElementById('floating-cards');
@@ -318,18 +232,14 @@ function initDashboardParallax() {
     const heroHeight = dashboard.offsetHeight;
     const scrollProgress = Math.min(scrolled / (heroHeight * 0.5), 1);
 
-    // Fade out floating elements as user scrolls
     if (floatingCards) {
       floatingCards.style.opacity = 1 - scrollProgress;
-      floatingCards.style.transform = `translateY(${-scrolled * 0.3}px)`;
     }
 
     if (statBubbles) {
       statBubbles.style.opacity = 1 - scrollProgress;
-      statBubbles.style.transform = `translateY(${-scrolled * 0.2}px)`;
     }
 
-    // Add scrolled class for CSS transitions
     if (scrollProgress > 0.3) {
       dashboard.classList.add('scrolled');
     } else {
@@ -344,32 +254,5 @@ function initDashboardParallax() {
       requestAnimationFrame(updateParallax);
       ticking = true;
     }
-  });
-}
-
-// ==================== UTILITY FUNCTIONS ====================
-
-// Debounce function for performance
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
-
-// Throttle function for scroll events
-function throttle(func, limit) {
-  let inThrottle;
-  return function(...args) {
-    if (!inThrottle) {
-      func.apply(this, args);
-      inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
-    }
-  };
+  }, { passive: true });
 }

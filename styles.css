@@ -782,12 +782,8 @@ img {
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid rgba(0, 163, 255, 0.2);
-  box-shadow:
-    0 8px 32px rgba(0,0,0,0.5),
-    0 0 30px rgba(0, 163, 255, 0.15),
-    inset 0 0 20px rgba(0, 163, 255, 0.05);
-  backdrop-filter: blur(4px);
-  transition: opacity 0.5s ease;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  will-change: transform;
 }
 
 /* Different card sizes */
@@ -795,11 +791,7 @@ img {
   width: 450px;
   opacity: 0.85;
   border: 2px solid rgba(0, 163, 255, 0.5);
-  box-shadow:
-    0 20px 60px rgba(0,0,0,0.7),
-    0 0 80px rgba(0, 163, 255, 0.35),
-    0 0 120px rgba(0, 163, 255, 0.15),
-    inset 0 0 40px rgba(0, 163, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 40px rgba(0, 163, 255, 0.25);
   z-index: 10;
 }
 
@@ -807,21 +799,14 @@ img {
   width: 380px;
   opacity: 0.75;
   border: 2px solid rgba(123, 47, 255, 0.4);
-  box-shadow:
-    0 16px 50px rgba(0,0,0,0.6),
-    0 0 60px rgba(123, 47, 255, 0.25),
-    0 0 100px rgba(123, 47, 255, 0.1),
-    inset 0 0 30px rgba(123, 47, 255, 0.08);
+  box-shadow: 0 16px 50px rgba(0,0,0,0.6), 0 0 30px rgba(123, 47, 255, 0.2);
   z-index: 9;
 }
 
 .floating-card.card-lg {
   width: 220px;
   opacity: 0.5;
-  box-shadow:
-    0 12px 40px rgba(0,0,0,0.6),
-    0 0 50px rgba(0, 163, 255, 0.2),
-    inset 0 0 30px rgba(0, 163, 255, 0.05);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
 }
 
 .floating-card.card-md {
@@ -1001,59 +986,55 @@ img {
     padding: 6rem 0 2rem;
   }
 
+  /* Only show 3 floating cards on mobile */
   .floating-card {
-    opacity: 0.25;
+    display: none;
   }
 
   .floating-card.card-featured {
-    width: 220px;
-    opacity: 0.7;
+    display: block;
+    width: 200px;
+    opacity: 0.65;
     --x: 2% !important;
     --y: 5% !important;
   }
 
   .floating-card.card-featured-secondary {
-    width: 180px;
-    opacity: 0.6;
+    display: block;
+    width: 160px;
+    opacity: 0.55;
     --x: 3% !important;
-    --y: 42% !important;
+    --y: 38% !important;
   }
 
-  .floating-card.card-lg {
-    width: 140px;
+  .floating-card.card-md:first-of-type {
+    display: block;
+    width: 90px;
     opacity: 0.35;
   }
 
-  .floating-card.card-md {
-    width: 100px;
-    opacity: 0.3;
-  }
-
-  .floating-card.card-sm {
-    width: 80px;
-    opacity: 0.2;
-  }
-
-  .floating-card.mobile-hide {
+  /* Hide all orbs on mobile for performance */
+  .glowing-orbs {
     display: none;
   }
 
-  /* Hide some orbs on mobile */
-  .orb-3, .orb-4 {
-    display: none;
-  }
-
-  .orb-1, .orb-2 {
-    filter: blur(40px);
-    opacity: 0.3;
-  }
-
+  /* Simplify stat bubbles - only show 2 */
   .stat-bubble {
     font-size: 0.7rem;
     padding: 0.4rem 0.8rem;
   }
 
-  .stat-bubbles .stat-bubble:nth-child(n+4) {
+  .stat-bubbles .stat-bubble:nth-child(n+3) {
+    display: none;
+  }
+
+  /* Hide scan lines on mobile */
+  .scan-lines {
+    display: none;
+  }
+
+  /* Hide constellation lines on mobile */
+  .constellation-lines {
     display: none;
   }
 
@@ -1099,7 +1080,8 @@ img {
 .ticker-track {
   display: flex;
   width: max-content;
-  animation: ticker 30s linear infinite;
+  animation: ticker 20s linear infinite;
+  will-change: transform;
 }
 
 .ticker-content {
@@ -1161,10 +1143,11 @@ img {
 .ticker-single .ticker-track {
   display: flex;
   width: max-content;
+  will-change: transform;
 }
 
 .ticker-single .ticker-left {
-  animation: ticker-reverse 25s linear infinite;
+  animation: ticker-reverse 18s linear infinite;
 }
 
 /* Dual ticker (two rows, opposite directions) */
@@ -1189,6 +1172,7 @@ img {
 .ticker-dual .ticker-track {
   display: flex;
   width: max-content;
+  will-change: transform;
 }
 
 .ticker-dual .ticker-content {
@@ -1197,11 +1181,11 @@ img {
 }
 
 .ticker-dual .ticker-right {
-  animation: ticker 20s linear infinite;
+  animation: ticker 14s linear infinite;
 }
 
 .ticker-dual .ticker-left {
-  animation: ticker-reverse 18s linear infinite;
+  animation: ticker-reverse 12s linear infinite;
 }
 
 .ticker-stat {
@@ -1360,7 +1344,8 @@ section {
   display: flex;
   width: max-content;
   gap: 1.5rem;
-  animation: scroll-clients 40s linear infinite;
+  animation: scroll-clients 28s linear infinite;
+  will-change: transform;
 }
 
 @keyframes scroll-clients {
@@ -1406,16 +1391,16 @@ section {
 
 /* Logo frames for Dropship, Kirgo */
 .client-photo-frame.logo-frame {
-  background: var(--bg-secondary);
+  background: rgba(255, 255, 255, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
 .client-photo-frame.logo-frame img {
-  width: 80%;
-  height: auto;
+  width: 70%;
+  height: 70%;
   object-fit: contain;
   object-position: center;
 }
@@ -1441,7 +1426,7 @@ section {
 
   .clients-track {
     gap: 1rem;
-    animation-duration: 25s;
+    animation-duration: 18s;
   }
 
   .client-photo-name {
@@ -1459,11 +1444,8 @@ section {
   display: flex;
   width: max-content;
   gap: 1rem;
-  animation: scroll-results 25s linear infinite;
-}
-
-.results-carousel.paused .results-track {
-  animation-play-state: paused;
+  animation: scroll-results 18s linear infinite;
+  will-change: transform;
 }
 
 .result-card {
@@ -1509,11 +1491,11 @@ section {
 
 /* Dual direction carousels */
 .results-track.results-right {
-  animation: scroll-results 30s linear infinite;
+  animation: scroll-results 20s linear infinite;
 }
 
 .results-track.results-left {
-  animation: scroll-results-reverse 28s linear infinite;
+  animation: scroll-results-reverse 18s linear infinite;
 }
 
 /* ==================== RESULTS GALLERY (Full page) ==================== */
