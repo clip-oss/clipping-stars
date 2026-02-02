@@ -791,9 +791,21 @@ img {
 }
 
 /* Different card sizes */
+.floating-card.card-featured {
+  width: 450px;
+  opacity: 0.8;
+  border: 2px solid rgba(0, 163, 255, 0.5);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.7),
+    0 0 80px rgba(0, 163, 255, 0.35),
+    0 0 120px rgba(0, 163, 255, 0.15),
+    inset 0 0 40px rgba(0, 163, 255, 0.1);
+  z-index: 10;
+}
+
 .floating-card.card-lg {
   width: 220px;
-  opacity: 0.6;
+  opacity: 0.5;
   box-shadow:
     0 12px 40px rgba(0,0,0,0.6),
     0 0 50px rgba(0, 163, 255, 0.2),
@@ -801,13 +813,13 @@ img {
 }
 
 .floating-card.card-md {
-  width: 180px;
-  opacity: 0.55;
+  width: 160px;
+  opacity: 0.4;
 }
 
 .floating-card.card-sm {
-  width: 140px;
-  opacity: 0.45;
+  width: 120px;
+  opacity: 0.35;
 }
 
 .floating-card img {
@@ -981,19 +993,26 @@ img {
     opacity: 0.25;
   }
 
+  .floating-card.card-featured {
+    width: 250px;
+    opacity: 0.7;
+    --x: 2% !important;
+    --y: 8% !important;
+  }
+
   .floating-card.card-lg {
     width: 140px;
     opacity: 0.35;
   }
 
   .floating-card.card-md {
-    width: 110px;
+    width: 100px;
     opacity: 0.3;
   }
 
   .floating-card.card-sm {
-    width: 90px;
-    opacity: 0.25;
+    width: 80px;
+    opacity: 0.2;
   }
 
   .floating-card.mobile-hide {
@@ -1109,6 +1128,24 @@ img {
   100% {
     transform: translateX(0);
   }
+}
+
+/* Single ticker (stats only) */
+.ticker-single {
+  background: var(--bg-secondary);
+  border-top: var(--border-subtle);
+  border-bottom: var(--border-subtle);
+  overflow: hidden;
+  padding: 0.5rem 0;
+}
+
+.ticker-single .ticker-track {
+  display: flex;
+  width: max-content;
+}
+
+.ticker-single .ticker-left {
+  animation: ticker-reverse 25s linear infinite;
 }
 
 /* Dual ticker (two rows, opposite directions) */
@@ -1283,6 +1320,118 @@ section {
   width: 60%;
   height: auto;
   object-fit: contain;
+}
+
+/* ==================== CLIENT PHOTO CAROUSEL ==================== */
+.clients-carousel-section {
+  padding: 3rem 0;
+  background: var(--bg-primary);
+}
+
+.clients-carousel-section .section-header {
+  margin-bottom: 2rem;
+}
+
+.clients-carousel {
+  overflow: hidden;
+  padding: 1rem 0;
+}
+
+.clients-carousel:hover .clients-track {
+  animation-play-state: paused;
+}
+
+.clients-track {
+  display: flex;
+  width: max-content;
+  gap: 1.5rem;
+  animation: scroll-clients 35s linear infinite;
+}
+
+@keyframes scroll-clients {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.client-photo-card {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.client-photo-frame {
+  width: 160px;
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all var(--transition-medium);
+}
+
+.client-photo-frame:hover {
+  border-color: var(--accent-blue);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), var(--glow-blue);
+  transform: translateY(-4px);
+}
+
+.client-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* Logo frames for Dropship, Kirgo */
+.client-photo-frame.logo-frame {
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.client-photo-frame.logo-frame img {
+  width: 80%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+.client-photo-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* Mobile client carousel */
+@media (max-width: 768px) {
+  .clients-carousel-section {
+    padding: 2rem 0;
+  }
+
+  .client-photo-frame {
+    width: 120px;
+    height: 150px;
+  }
+
+  .clients-track {
+    gap: 1rem;
+    animation-duration: 25s;
+  }
+
+  .client-photo-name {
+    font-size: 0.75rem;
+  }
 }
 
 /* ==================== RESULTS CAROUSEL ==================== */
