@@ -986,45 +986,45 @@ img {
     padding: 6rem 0 2rem;
   }
 
-  /* Only show 3 floating cards on mobile */
+  /* Floating cards as faint background texture only */
+  .floating-cards {
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* Hide all floating cards by default */
   .floating-card {
     display: none;
   }
 
-  .floating-card.card-featured {
+  /* Show only 2-3 small, very faded cards as background decoration */
+  .floating-card.card-md {
     display: block;
-    width: 200px;
-    opacity: 0.65;
-    --x: 2% !important;
-    --y: 5% !important;
+    width: 80px;
+    opacity: 0.1 !important;
+    z-index: -1;
   }
 
+  .floating-card.card-sm {
+    display: block;
+    width: 60px;
+    opacity: 0.1 !important;
+    z-index: -1;
+  }
+
+  /* Hide the large featured screenshots on mobile - too big */
+  .floating-card.card-featured,
   .floating-card.card-featured-secondary {
-    display: block;
-    width: 160px;
-    opacity: 0.55;
-    --x: 3% !important;
-    --y: 38% !important;
+    display: none !important;
   }
 
-  .floating-card.card-md:first-of-type {
-    display: block;
-    width: 90px;
-    opacity: 0.35;
+  /* Hide ALL stat bubbles on mobile - they overlap text */
+  .stat-bubbles {
+    display: none !important;
   }
 
   /* Hide all orbs on mobile for performance */
   .glowing-orbs {
-    display: none;
-  }
-
-  /* Simplify stat bubbles - only show 2 */
-  .stat-bubble {
-    font-size: 0.7rem;
-    padding: 0.4rem 0.8rem;
-  }
-
-  .stat-bubbles .stat-bubble:nth-child(n+3) {
     display: none;
   }
 
@@ -1038,6 +1038,11 @@ img {
     display: none;
   }
 
+  /* Hide scroll indicator on mobile - bottom nav is there */
+  .hero-dashboard .scroll-indicator {
+    display: none;
+  }
+
   .counter-number {
     font-size: 2.2rem;
   }
@@ -1048,15 +1053,37 @@ img {
 
   .hero-dashboard h1 {
     font-size: 1.8rem;
+    position: relative;
+    z-index: 10;
   }
 
   .hero-subtitle {
     font-size: 1rem;
     padding: 0 1rem;
+    position: relative;
+    z-index: 10;
   }
 
-  .hero-dashboard .scroll-indicator {
-    bottom: 5rem;
+  /* Ensure all dashboard content is above background decorations */
+  .dashboard-content {
+    position: relative;
+    z-index: 10;
+  }
+
+  .live-counter {
+    position: relative;
+    z-index: 10;
+  }
+
+  .hero-cta {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Full width Apply button on mobile */
+  .hero-cta .btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 
