@@ -978,48 +978,72 @@ img {
     display: none !important;
   }
 
-  /* Show YouTube screenshot top right - partially cut off by edge */
+  /* Mobile: Show 4 screenshots in all corners, same visibility as desktop */
+  /* Top Left */
   .floating-card.card-featured {
     display: block !important;
     position: absolute;
-    width: 180px !important;
-    opacity: 0.45 !important;
+    width: 140px !important;
+    opacity: 0.5 !important;
     top: 8% !important;
-    left: auto !important;
-    right: -30px !important;
-    transform: rotate(8deg) !important;
+    left: -15px !important;
+    right: auto !important;
+    transform: rotate(-5deg) !important;
     z-index: 1;
     animation: none !important;
+    border: 1px solid rgba(0, 163, 255, 0.3) !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(0, 163, 255, 0.15) !important;
   }
 
-  /* Show Instagram screenshot bottom left - partially visible */
+  /* Top Right */
   .floating-card.card-featured-secondary {
     display: block !important;
     position: absolute;
-    width: 160px !important;
-    opacity: 0.4 !important;
-    top: auto !important;
-    bottom: 15% !important;
-    left: -25px !important;
-    right: auto !important;
-    transform: rotate(-6deg) !important;
+    width: 130px !important;
+    opacity: 0.45 !important;
+    top: 10% !important;
+    left: auto !important;
+    right: -10px !important;
+    bottom: auto !important;
+    transform: rotate(6deg) !important;
     z-index: 1;
     animation: none !important;
+    border: 1px solid rgba(123, 47, 255, 0.3) !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(123, 47, 255, 0.15) !important;
   }
 
-  /* Show one more screenshot bottom right */
+  /* Bottom Left */
   .floating-card.card-md:first-of-type {
     display: block !important;
     position: absolute;
     width: 120px !important;
-    opacity: 0.35 !important;
+    opacity: 0.45 !important;
     top: auto !important;
-    bottom: 22% !important;
-    left: auto !important;
-    right: 5% !important;
-    transform: rotate(5deg) !important;
+    bottom: 18% !important;
+    left: -10px !important;
+    right: auto !important;
+    transform: rotate(4deg) !important;
     z-index: 1;
     animation: none !important;
+    border: 1px solid rgba(0, 163, 255, 0.25) !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 15px rgba(0, 163, 255, 0.1) !important;
+  }
+
+  /* Bottom Right */
+  .floating-card.card-sm:first-of-type {
+    display: block !important;
+    position: absolute;
+    width: 110px !important;
+    opacity: 0.4 !important;
+    top: auto !important;
+    bottom: 20% !important;
+    left: auto !important;
+    right: 5% !important;
+    transform: rotate(-4deg) !important;
+    z-index: 1;
+    animation: none !important;
+    border: 1px solid rgba(123, 47, 255, 0.25) !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 15px rgba(123, 47, 255, 0.1) !important;
   }
 
   /* Hide ALL stat bubbles on mobile - they overlap text */
@@ -1112,30 +1136,45 @@ img {
 /* Floating cards always visible - no scroll fade */
 
 /* ==================== SOCIAL PROOF TICKER ==================== */
-.ticker {
-  padding: 1.5rem 0;
+/* Universal marquee animation for all carousels */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Single ticker (stats only) */
+.ticker-single {
   background: var(--bg-secondary);
-  overflow: hidden;
   border-top: var(--border-subtle);
   border-bottom: var(--border-subtle);
+  overflow: hidden;
+  padding: 0.5rem 0;
 }
 
 .ticker-track {
   display: flex;
   width: max-content;
-  animation: ticker 20s linear infinite;
+  animation: marquee 25s linear infinite;
   will-change: transform;
-}
-
-.ticker-content {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
 }
 
 .ticker-item {
   display: inline-flex;
   align-items: center;
+  flex-shrink: 0;
   color: var(--text-secondary);
   font-family: 'Space Grotesk', sans-serif;
   font-size: 0.9rem;
@@ -1154,81 +1193,6 @@ img {
   border-radius: 50%;
   margin-left: 1rem;
   flex-shrink: 0;
-}
-
-@keyframes ticker {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes ticker-reverse {
-  0% {
-    transform: translateX(-50%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
-/* Single ticker (stats only) */
-.ticker-single {
-  background: var(--bg-secondary);
-  border-top: var(--border-subtle);
-  border-bottom: var(--border-subtle);
-  overflow: hidden;
-  padding: 0.5rem 0;
-}
-
-.ticker-single .ticker-track {
-  display: flex;
-  width: max-content;
-  will-change: transform;
-}
-
-.ticker-single .ticker-left {
-  animation: ticker-reverse 18s linear infinite;
-}
-
-/* Dual ticker (two rows, opposite directions) */
-.ticker-dual {
-  background: var(--bg-secondary);
-  border-top: var(--border-subtle);
-  border-bottom: var(--border-subtle);
-  overflow: hidden;
-  margin-top: 0;
-  padding: 0;
-}
-
-.ticker-row {
-  padding: 0.4rem 0;
-  overflow: hidden;
-}
-
-.ticker-row:first-child {
-  border-bottom: var(--border-subtle);
-}
-
-.ticker-dual .ticker-track {
-  display: flex;
-  width: max-content;
-  will-change: transform;
-}
-
-.ticker-dual .ticker-content {
-  display: flex;
-  flex-shrink: 0;
-}
-
-.ticker-dual .ticker-right {
-  animation: ticker 14s linear infinite;
-}
-
-.ticker-dual .ticker-left {
-  animation: ticker-reverse 12s linear infinite;
 }
 
 .ticker-stat {
@@ -1387,17 +1351,8 @@ section {
   display: flex;
   width: max-content;
   gap: 1.5rem;
-  animation: scroll-clients 28s linear infinite;
+  animation: marquee 30s linear infinite;
   will-change: transform;
-}
-
-@keyframes scroll-clients {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
 }
 
 .client-photo-card {
@@ -1483,7 +1438,7 @@ section {
   display: flex;
   width: max-content;
   gap: 1rem;
-  animation: scroll-results 18s linear infinite;
+  animation: marquee 20s linear infinite;
   will-change: transform;
 }
 
@@ -1510,31 +1465,13 @@ section {
   object-fit: contain;
 }
 
-@keyframes scroll-results {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes scroll-results-reverse {
-  0% {
-    transform: translateX(-50%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
 /* Dual direction carousels */
 .results-track.results-right {
-  animation: scroll-results 20s linear infinite;
+  animation: marquee 22s linear infinite;
 }
 
 .results-track.results-left {
-  animation: scroll-results-reverse 18s linear infinite;
+  animation: marquee-reverse 20s linear infinite;
 }
 
 /* ==================== RESULTS GALLERY (Full page) ==================== */
@@ -2074,20 +2011,12 @@ section {
   }
 
   /* Faster carousels on mobile */
-  .ticker-dual .ticker-right {
+  .results-track.results-right {
     animation-duration: 12s;
   }
 
-  .ticker-dual .ticker-left {
-    animation-duration: 10s;
-  }
-
-  .results-track.results-right {
-    animation-duration: 10s;
-  }
-
   .results-track.results-left {
-    animation-duration: 9s;
+    animation-duration: 11s;
   }
 
   .hero-content {
