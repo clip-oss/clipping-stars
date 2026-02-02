@@ -2491,6 +2491,60 @@ section {
   line-height: 1.4;
 }
 
+/* ==================== SOCIAL PROOF SECTION (About Page) ==================== */
+.social-proof-section {
+  padding: 4rem 0;
+  background: var(--bg-primary);
+}
+
+.social-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.social-proof-item {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  background: var(--bg-secondary);
+}
+
+.social-proof-item img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.social-proof-item figcaption {
+  padding: 0.75rem 1rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  text-align: center;
+  background: var(--bg-card);
+}
+
+@media (max-width: 768px) {
+  .social-proof-grid {
+    gap: 1rem;
+  }
+
+  .social-proof-item img {
+    height: 200px;
+  }
+
+  .social-proof-item figcaption {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
 /* Case study button on client cards */
 .client-card .btn-case-study {
   display: inline-flex;
