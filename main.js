@@ -59,24 +59,20 @@ function initMobileMenu() {
 }
 
 // ==================== SCROLL ANIMATIONS ====================
-// Single IntersectionObserver for all animated elements
+// Only used for counter animations now - visibility handled by CSS defaults
 function initScrollAnimations() {
-  const animatedElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .timeline-item, .result-item, [data-count]');
+  const counterElements = document.querySelectorAll('[data-count]');
 
-  if (!animatedElements.length) return;
+  if (!counterElements.length) return;
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-
-        // Handle counter animation
-        if (entry.target.hasAttribute('data-count') && !entry.target.classList.contains('counted')) {
+        // Handle counter animation only
+        if (!entry.target.classList.contains('counted')) {
           animateCounter(entry.target);
           entry.target.classList.add('counted');
         }
-
-        // Unobserve after animation triggers
         observer.unobserve(entry.target);
       }
     });
@@ -86,7 +82,7 @@ function initScrollAnimations() {
     threshold: 0.1
   });
 
-  animatedElements.forEach(el => observer.observe(el));
+  counterElements.forEach(el => observer.observe(el));
 }
 
 // ==================== COUNTER ANIMATIONS ====================
@@ -132,28 +128,9 @@ function animateCounter(element) {
 }
 
 // ==================== SMOOTH PAGE TRANSITIONS ====================
+// Disabled - was causing content visibility issues
 function initSmoothPageTransition() {
-  const links = document.querySelectorAll('a[href$=".html"]');
-
-  links.forEach(link => {
-    link.addEventListener('click', (e) => {
-      if (link.hostname === window.location.hostname) {
-        e.preventDefault();
-        document.body.style.opacity = '0';
-        document.body.style.transition = 'opacity 0.3s ease';
-
-        setTimeout(() => {
-          window.location.href = link.href;
-        }, 300);
-      }
-    });
-  });
-
-  document.body.style.opacity = '0';
-  requestAnimationFrame(() => {
-    document.body.style.transition = 'opacity 0.3s ease';
-    document.body.style.opacity = '1';
-  });
+  // No longer manipulating body opacity - let content show immediately
 }
 
 // ==================== LIVE COUNTER ====================
