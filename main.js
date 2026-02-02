@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   initSmoothPageTransition();
   initLiveCounter();
+  initApplyModal();
   // Parallax removed - floating cards should always stay visible
 });
 
@@ -191,3 +192,77 @@ function initLiveCounter() {
 }
 
 // Dashboard parallax removed - floating cards should always stay visible
+
+// ==================== APPLY MODAL ====================
+function initApplyModal() {
+  const modal = document.getElementById('applyModal');
+  const overlay = modal?.querySelector('.apply-overlay');
+  const closeBtn = document.getElementById('applyClose');
+  const form = document.getElementById('applyForm');
+  const successMsg = document.getElementById('applySuccess');
+
+  if (!modal) return;
+
+  // Find all Apply Now buttons/links and attach click handlers
+  const applyButtons = document.querySelectorAll('a[href="#cta"], .btn-primary');
+
+  applyButtons.forEach(btn => {
+    // Only handle buttons that contain "Apply" text or link to #cta
+    const text = btn.textContent.toLowerCase();
+    if (text.includes('apply') || btn.getAttribute('href') === '#cta') {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal();
+      });
+    }
+  });
+
+  // Open modal function
+  function openModal() {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    // Reset form and success state
+    if (form) form.style.display = 'block';
+    if (successMsg) successMsg.style.display = 'none';
+    if (form) form.reset();
+  }
+
+  // Close modal function
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Close on overlay click
+  if (overlay) {
+    overlay.addEventListener('click', closeModal);
+  }
+
+  // Close on close button click
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+  }
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  // Form submission
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Hide form, show success message
+      form.style.display = 'none';
+      if (successMsg) successMsg.style.display = 'block';
+
+      // Auto-close after 3 seconds
+      setTimeout(() => {
+        closeModal();
+      }, 3000);
+    });
+  }
+}

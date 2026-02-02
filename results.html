@@ -345,6 +345,26 @@
     </a>
   </nav>
 
+  <!-- Apply Modal -->
+  <div class="apply-modal" id="applyModal">
+    <div class="apply-overlay"></div>
+    <div class="apply-card">
+      <button class="apply-close" id="applyClose">&times;</button>
+      <h2>Apply To Work With Us</h2>
+      <p>We accept less than 20% of applicants.</p>
+      <form id="applyForm">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Tell us about your content and goals" rows="4" required></textarea>
+        <button type="submit">Submit Application</button>
+      </form>
+      <div class="apply-success" id="applySuccess" style="display:none;">
+        <h3>Application Received!</h3>
+        <p>We'll be in touch within 48 hours.</p>
+      </div>
+    </div>
+  </div>
+
   <script src="main.js"></script>
 </body>
 </html>
