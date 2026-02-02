@@ -793,7 +793,7 @@ img {
 /* Different card sizes */
 .floating-card.card-featured {
   width: 450px;
-  opacity: 0.8;
+  opacity: 0.85;
   border: 2px solid rgba(0, 163, 255, 0.5);
   box-shadow:
     0 20px 60px rgba(0,0,0,0.7),
@@ -801,6 +801,18 @@ img {
     0 0 120px rgba(0, 163, 255, 0.15),
     inset 0 0 40px rgba(0, 163, 255, 0.1);
   z-index: 10;
+}
+
+.floating-card.card-featured-secondary {
+  width: 380px;
+  opacity: 0.75;
+  border: 2px solid rgba(123, 47, 255, 0.4);
+  box-shadow:
+    0 16px 50px rgba(0,0,0,0.6),
+    0 0 60px rgba(123, 47, 255, 0.25),
+    0 0 100px rgba(123, 47, 255, 0.1),
+    inset 0 0 30px rgba(123, 47, 255, 0.08);
+  z-index: 9;
 }
 
 .floating-card.card-lg {
@@ -994,10 +1006,17 @@ img {
   }
 
   .floating-card.card-featured {
-    width: 250px;
+    width: 220px;
     opacity: 0.7;
     --x: 2% !important;
-    --y: 8% !important;
+    --y: 5% !important;
+  }
+
+  .floating-card.card-featured-secondary {
+    width: 180px;
+    opacity: 0.6;
+    --x: 3% !important;
+    --y: 42% !important;
   }
 
   .floating-card.card-lg {
@@ -1337,15 +1356,11 @@ section {
   padding: 1rem 0;
 }
 
-.clients-carousel:hover .clients-track {
-  animation-play-state: paused;
-}
-
 .clients-track {
   display: flex;
   width: max-content;
   gap: 1.5rem;
-  animation: scroll-clients 35s linear infinite;
+  animation: scroll-clients 40s linear infinite;
 }
 
 @keyframes scroll-clients {
@@ -1353,7 +1368,7 @@ section {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-33.333%);
   }
 }
 
