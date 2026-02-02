@@ -1012,15 +1012,15 @@ img {
     box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(123, 47, 255, 0.15) !important;
   }
 
-  /* Bottom Left */
-  .floating-card.card-md:first-of-type {
+  /* Bottom Left - ig_88m_spike.jpeg (3rd card) */
+  .floating-card:nth-child(3) {
     display: block !important;
     position: absolute;
     width: 120px !important;
     opacity: 0.45 !important;
     top: auto !important;
-    bottom: 18% !important;
-    left: -10px !important;
+    bottom: 22% !important;
+    left: -15px !important;
     right: auto !important;
     transform: rotate(4deg) !important;
     z-index: 1;
@@ -1029,16 +1029,16 @@ img {
     box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 15px rgba(0, 163, 255, 0.1) !important;
   }
 
-  /* Bottom Right */
-  .floating-card.card-sm:first-of-type {
+  /* Bottom Right - tiktok_17m_viral.png (4th card) */
+  .floating-card:nth-child(4) {
     display: block !important;
     position: absolute;
     width: 110px !important;
     opacity: 0.4 !important;
     top: auto !important;
-    bottom: 20% !important;
+    bottom: 18% !important;
     left: auto !important;
-    right: 5% !important;
+    right: -5px !important;
     transform: rotate(-4deg) !important;
     z-index: 1;
     animation: none !important;
