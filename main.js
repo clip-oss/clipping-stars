@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCounterAnimations();
   initLazyLoading();
   initSmoothPageTransition();
+  initCarouselClickPause();
 });
 
 // ==================== NAVBAR ====================
@@ -208,6 +209,16 @@ function initSmoothPageTransition() {
   requestAnimationFrame(() => {
     document.body.style.transition = 'opacity 0.3s ease';
     document.body.style.opacity = '1';
+  });
+}
+
+// ==================== CAROUSEL CLICK TO PAUSE ====================
+function initCarouselClickPause() {
+  const carousel = document.getElementById('results-carousel');
+  if (!carousel) return;
+
+  carousel.addEventListener('click', () => {
+    carousel.classList.toggle('paused');
   });
 }
 

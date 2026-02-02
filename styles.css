@@ -634,10 +634,10 @@ section {
 .results-track {
   display: flex;
   gap: 1.5rem;
-  animation: scroll-results 40s linear infinite;
+  animation: scroll-results 15s linear infinite;
 }
 
-.results-track:hover {
+.results-carousel.paused .results-track {
   animation-play-state: paused;
 }
 
@@ -679,12 +679,16 @@ section {
 
 .result-item {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 2rem;
   align-items: center;
   opacity: 0;
   transform: translateY(30px);
   transition: all var(--transition-slow);
+}
+
+.result-image img {
+  max-width: 350px;
 }
 
 .result-item.visible {
