@@ -978,14 +978,14 @@ img {
     display: none !important;
   }
 
-  /* Mobile: Show 4 screenshots in all corners, same visibility as desktop */
+  /* Mobile: Show 5 screenshots - 2 top, 1 middle-right, 2 bottom */
   /* Top Left */
   .floating-card.card-featured {
     display: block !important;
     position: absolute;
     width: 140px !important;
     opacity: 0.5 !important;
-    top: 8% !important;
+    top: 6% !important;
     left: -15px !important;
     right: auto !important;
     transform: rotate(-5deg) !important;
@@ -1001,7 +1001,7 @@ img {
     position: absolute;
     width: 130px !important;
     opacity: 0.45 !important;
-    top: 10% !important;
+    top: 8% !important;
     left: auto !important;
     right: -10px !important;
     bottom: auto !important;
@@ -1012,37 +1012,54 @@ img {
     box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(123, 47, 255, 0.15) !important;
   }
 
-  /* Bottom Left - ig_88m_spike.jpeg (3rd card) */
+  /* Middle Right - fills the dark gap between top cards (3rd child - ig_88m_spike) */
   .floating-card:nth-child(3) {
     display: block !important;
     position: absolute;
-    width: 120px !important;
-    opacity: 0.45 !important;
-    top: auto !important;
-    bottom: 22% !important;
-    left: -15px !important;
-    right: auto !important;
-    transform: rotate(4deg) !important;
+    width: 100px !important;
+    opacity: 0.35 !important;
+    top: 22% !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: 15% !important;
+    transform: rotate(-8deg) !important;
     z-index: 1;
     animation: none !important;
-    border: 1px solid rgba(0, 163, 255, 0.25) !important;
+    border: 1px solid rgba(0, 163, 255, 0.2) !important;
     box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 15px rgba(0, 163, 255, 0.1) !important;
   }
 
-  /* Bottom Right - tiktok_17m_viral.png (4th card) */
+  /* Bottom Left - moved LOWER to avoid text overlap (4th card - tiktok_17m_viral) */
   .floating-card:nth-child(4) {
     display: block !important;
     position: absolute;
     width: 110px !important;
-    opacity: 0.4 !important;
+    opacity: 0.25 !important;
     top: auto !important;
-    bottom: 18% !important;
-    left: auto !important;
-    right: -5px !important;
-    transform: rotate(-4deg) !important;
+    bottom: 4% !important;
+    left: -10px !important;
+    right: auto !important;
+    transform: rotate(5deg) !important;
     z-index: 1;
     animation: none !important;
-    border: 1px solid rgba(123, 47, 255, 0.25) !important;
+    border: 1px solid rgba(0, 163, 255, 0.2) !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 15px rgba(0, 163, 255, 0.1) !important;
+  }
+
+  /* Bottom Right - moved LOWER to avoid text overlap (5th card - ig_27m_reel) */
+  .floating-card:nth-child(5) {
+    display: block !important;
+    position: absolute;
+    width: 100px !important;
+    opacity: 0.25 !important;
+    top: auto !important;
+    bottom: 2% !important;
+    left: auto !important;
+    right: -5px !important;
+    transform: rotate(-6deg) !important;
+    z-index: 1;
+    animation: none !important;
+    border: 1px solid rgba(123, 47, 255, 0.2) !important;
     box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 15px rgba(123, 47, 255, 0.1) !important;
   }
 
@@ -1071,31 +1088,39 @@ img {
     display: none;
   }
 
-  /* Counter with blue glow background */
-  .live-counter {
+  /* Dark spotlight gradient behind text for readability */
+  .dashboard-content {
     position: relative;
     z-index: 10;
   }
 
-  .live-counter::before {
+  .dashboard-content::before {
     content: '';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 280px;
-    height: 120px;
-    background: radial-gradient(ellipse, rgba(0, 100, 200, 0.25) 0%, rgba(0, 60, 140, 0.1) 40%, transparent 70%);
+    width: 120%;
+    height: 130%;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.4) 40%, transparent 70%);
     z-index: -1;
     pointer-events: none;
   }
 
+  /* Counter with enhanced readability */
+  .live-counter {
+    position: relative;
+    z-index: 10;
+  }
+
   .counter-number {
     font-size: 2.2rem;
+    text-shadow: 0 0 30px rgba(0, 163, 255, 0.5), 0 0 60px rgba(0, 163, 255, 0.3);
   }
 
   .counter-label {
     font-size: 0.85rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
   }
 
   /* Headline with text shadow for readability */
@@ -1103,7 +1128,7 @@ img {
     font-size: 1.8rem;
     position: relative;
     z-index: 10;
-    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8), 0 4px 40px rgba(0, 0, 0, 0.6);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.9), 0 4px 40px rgba(0, 0, 0, 0.7);
   }
 
   /* Subtitle with text shadow */
@@ -1112,13 +1137,7 @@ img {
     padding: 0 1rem;
     position: relative;
     z-index: 10;
-    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.8);
-  }
-
-  /* Ensure all dashboard content is above background decorations */
-  .dashboard-content {
-    position: relative;
-    z-index: 10;
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.9);
   }
 
   .hero-cta {
@@ -1130,6 +1149,11 @@ img {
   .hero-cta .btn {
     width: 100%;
     justify-content: center;
+  }
+
+  /* See Our Results link - ensure readability */
+  .hero-cta .link-arrow-hero {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
   }
 }
 
