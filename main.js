@@ -6,11 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   initSmoothPageTransition();
   initLiveCounter();
-
-  // Only init parallax on desktop
-  if (window.innerWidth > 768) {
-    initDashboardParallax();
-  }
+  // Parallax removed - floating cards should always stay visible
 });
 
 // ==================== NAVBAR ====================
@@ -194,42 +190,4 @@ function initLiveCounter() {
   });
 }
 
-// ==================== DASHBOARD PARALLAX (Desktop Only) ====================
-function initDashboardParallax() {
-  const dashboard = document.getElementById('hero-dashboard');
-  const floatingCards = document.getElementById('floating-cards');
-  const statBubbles = document.getElementById('stat-bubbles');
-
-  if (!dashboard) return;
-
-  let ticking = false;
-
-  function updateParallax() {
-    const scrolled = window.pageYOffset;
-    const heroHeight = dashboard.offsetHeight;
-    const scrollProgress = Math.min(scrolled / (heroHeight * 0.5), 1);
-
-    if (floatingCards) {
-      floatingCards.style.opacity = 1 - scrollProgress;
-    }
-
-    if (statBubbles) {
-      statBubbles.style.opacity = 1 - scrollProgress;
-    }
-
-    if (scrollProgress > 0.3) {
-      dashboard.classList.add('scrolled');
-    } else {
-      dashboard.classList.remove('scrolled');
-    }
-
-    ticking = false;
-  }
-
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(updateParallax);
-      ticking = true;
-    }
-  }, { passive: true });
-}
+// Dashboard parallax removed - floating cards should always stay visible

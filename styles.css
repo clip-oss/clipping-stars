@@ -1084,13 +1084,7 @@ img {
   }
 }
 
-/* Parallax scroll fade effect */
-.hero-dashboard.scrolled .floating-cards,
-.hero-dashboard.scrolled .stat-bubbles {
-  opacity: 0;
-  transform: translateY(-50px);
-  transition: all 0.5s ease;
-}
+/* Floating cards always visible - no scroll fade */
 
 /* ==================== SOCIAL PROOF TICKER ==================== */
 .ticker {
@@ -1142,13 +1136,13 @@ img {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-25%);
   }
 }
 
 @keyframes ticker-reverse {
   0% {
-    transform: translateX(-50%);
+    transform: translateX(-25%);
   }
   100% {
     transform: translateX(0);
@@ -1377,7 +1371,7 @@ section {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-33.333%);
+    transform: translateX(-25%);
   }
 }
 
@@ -1500,13 +1494,13 @@ section {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-25%);
   }
 }
 
 @keyframes scroll-results-reverse {
   0% {
-    transform: translateX(-50%);
+    transform: translateX(-25%);
   }
   100% {
     transform: translateX(0);
