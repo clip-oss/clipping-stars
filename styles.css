@@ -208,8 +208,16 @@ img {
 }
 
 .logo-star {
-  color: var(--accent-blue);
-  font-size: 0.8em;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 2px;
+}
+
+.logo-star svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--accent-blue);
+  filter: drop-shadow(0 0 4px rgba(0, 163, 255, 0.5));
 }
 
 .nav-links {
@@ -643,7 +651,7 @@ section {
 
 .result-card {
   flex-shrink: 0;
-  width: 400px;
+  width: 280px;
   background: var(--bg-card);
   border: 1px solid var(--glass-border);
   border-radius: 16px;
@@ -679,7 +687,7 @@ section {
 
 .result-item {
   display: grid;
-  grid-template-columns: 1fr 1.5fr;
+  grid-template-columns: 280px 1fr;
   gap: 2rem;
   align-items: center;
   opacity: 0;
@@ -687,8 +695,8 @@ section {
   transition: all var(--transition-slow);
 }
 
-.result-image img {
-  max-width: 350px;
+.result-item.landscape {
+  grid-template-columns: 500px 1fr;
 }
 
 .result-item.visible {
