@@ -1470,13 +1470,14 @@ section {
   border-radius: 10px;
   overflow: hidden;
   flex-shrink: 0;
+  background: #111;
 }
 
 .result-card img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  background: #111;
+  object-fit: cover;
+  object-position: top;
 }
 
 /* ==================== RESULTS GALLERY (Full page) ==================== */
