@@ -541,9 +541,11 @@ img {
   justify-content: center;
   margin-bottom: 0;
   padding-bottom: 0;
+  /* Performance: contain layout, style, and paint within this element */
+  contain: layout style paint;
 }
 
-/* Animated Gradient Mesh Background (lava lamp effect) */
+/* Animated Gradient Mesh Background (optimized - 2 colors, 30s, will-change) */
 .gradient-mesh {
   position: absolute;
   top: 0;
@@ -552,34 +554,26 @@ img {
   height: 100%;
   background:
     radial-gradient(ellipse 80% 50% at 20% 40%, rgba(0, 50, 120, 0.4) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(60, 0, 100, 0.3) 0%, transparent 50%),
-    radial-gradient(ellipse 70% 50% at 50% 80%, rgba(0, 80, 150, 0.25) 0%, transparent 50%);
+    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(60, 0, 100, 0.3) 0%, transparent 50%);
   z-index: 0;
-  animation: meshShift 20s ease-in-out infinite;
+  animation: meshShift 35s linear infinite;
+  will-change: background;
 }
 
 @keyframes meshShift {
   0%, 100% {
     background:
       radial-gradient(ellipse 80% 50% at 20% 40%, rgba(0, 50, 120, 0.4) 0%, transparent 50%),
-      radial-gradient(ellipse 60% 40% at 80% 60%, rgba(60, 0, 100, 0.3) 0%, transparent 50%),
-      radial-gradient(ellipse 70% 50% at 50% 80%, rgba(0, 80, 150, 0.25) 0%, transparent 50%);
+      radial-gradient(ellipse 60% 40% at 80% 60%, rgba(60, 0, 100, 0.3) 0%, transparent 50%);
   }
-  33% {
+  50% {
     background:
-      radial-gradient(ellipse 70% 60% at 70% 30%, rgba(0, 60, 130, 0.35) 0%, transparent 50%),
-      radial-gradient(ellipse 80% 50% at 30% 70%, rgba(80, 0, 120, 0.3) 0%, transparent 50%),
-      radial-gradient(ellipse 60% 40% at 60% 50%, rgba(0, 100, 180, 0.2) 0%, transparent 50%);
-  }
-  66% {
-    background:
-      radial-gradient(ellipse 60% 50% at 40% 60%, rgba(0, 70, 140, 0.4) 0%, transparent 50%),
-      radial-gradient(ellipse 70% 45% at 70% 30%, rgba(50, 0, 90, 0.35) 0%, transparent 50%),
-      radial-gradient(ellipse 80% 55% at 20% 80%, rgba(0, 60, 120, 0.25) 0%, transparent 50%);
+      radial-gradient(ellipse 70% 60% at 70% 50%, rgba(0, 60, 130, 0.35) 0%, transparent 50%),
+      radial-gradient(ellipse 80% 50% at 30% 70%, rgba(80, 0, 120, 0.3) 0%, transparent 50%);
   }
 }
 
-/* Glowing Orbs */
+/* Glowing Orbs (optimized - 3 orbs, radial-gradient blur, transform only) */
 .glowing-orbs {
   position: absolute;
   top: 0;
@@ -594,44 +588,40 @@ img {
 .orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(60px);
-  opacity: 0.4;
+  /* Use radial-gradient for soft blur effect instead of filter:blur */
+  will-change: transform;
 }
 
 .orb-1 {
   width: 300px;
   height: 300px;
-  background: rgba(0, 163, 255, 0.3);
+  background: radial-gradient(circle, rgba(0, 163, 255, 0.35) 0%, rgba(0, 163, 255, 0) 70%);
   top: 10%;
   left: 10%;
-  animation: orbFloat1 25s ease-in-out infinite;
+  animation: orbFloat1 30s linear infinite;
 }
 
 .orb-2 {
-  width: 200px;
-  height: 200px;
-  background: rgba(123, 47, 255, 0.25);
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(123, 47, 255, 0.3) 0%, rgba(123, 47, 255, 0) 70%);
   top: 60%;
   right: 15%;
-  animation: orbFloat2 30s ease-in-out infinite;
+  animation: orbFloat2 35s linear infinite;
 }
 
 .orb-3 {
-  width: 250px;
-  height: 250px;
-  background: rgba(0, 100, 200, 0.2);
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(0, 100, 200, 0.25) 0%, rgba(0, 100, 200, 0) 70%);
   bottom: 20%;
   left: 30%;
-  animation: orbFloat3 20s ease-in-out infinite;
+  animation: orbFloat3 28s linear infinite;
 }
 
+/* Hide 4th orb for performance */
 .orb-4 {
-  width: 150px;
-  height: 150px;
-  background: rgba(100, 0, 180, 0.2);
-  top: 30%;
-  right: 25%;
-  animation: orbFloat4 22s ease-in-out infinite;
+  display: none;
 }
 
 @keyframes orbFloat1 {
@@ -655,13 +645,6 @@ img {
   75% { transform: translate(20px, 30px); }
 }
 
-@keyframes orbFloat4 {
-  0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(-30px, 40px); }
-  50% { transform: translate(20px, 50px); }
-  75% { transform: translate(40px, -20px); }
-}
-
 /* Scan Lines Overlay */
 .scan-lines {
   position: absolute;
@@ -680,7 +663,7 @@ img {
   pointer-events: none;
 }
 
-/* Constellation Lines */
+/* Constellation Lines (optimized - static, no animation) */
 .constellation-lines {
   position: absolute;
   top: 0;
@@ -692,20 +675,9 @@ img {
 }
 
 .constellation-line {
-  opacity: 0.15;
+  opacity: 0.05;
   stroke-dasharray: 5 10;
-  animation: constellationPulse 4s ease-in-out infinite;
-}
-
-.constellation-line:nth-child(2) { animation-delay: 0.5s; }
-.constellation-line:nth-child(3) { animation-delay: 1s; }
-.constellation-line:nth-child(4) { animation-delay: 1.5s; }
-.constellation-line:nth-child(5) { animation-delay: 2s; }
-.constellation-line:nth-child(6) { animation-delay: 2.5s; }
-
-@keyframes constellationPulse {
-  0%, 100% { opacity: 0.1; }
-  50% { opacity: 0.25; }
+  /* No animation for performance */
 }
 
 /* Grid Pattern Background */
@@ -735,27 +707,19 @@ img {
 .growth-path {
   stroke-dasharray: 2000;
   stroke-dashoffset: 2000;
-  animation: drawLine 4s ease-in-out infinite;
+  animation: drawLine 6s linear infinite;
+  opacity: 0.8;
 }
 
 @keyframes drawLine {
   0% {
     stroke-dashoffset: 2000;
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
   }
   50% {
     stroke-dashoffset: 0;
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
   }
   100% {
     stroke-dashoffset: 0;
-    opacity: 0;
   }
 }
 
@@ -777,7 +741,7 @@ img {
   width: 160px;
   transform: rotate(var(--rotate));
   opacity: 0.5;
-  animation: float var(--float-speed, 6s) ease-in-out infinite;
+  animation: float var(--float-speed, 6s) linear infinite;
   animation-delay: var(--delay);
   border-radius: 12px;
   overflow: hidden;
@@ -852,15 +816,16 @@ img {
   left: var(--start-x);
   padding: 0.5rem 1rem;
   background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 50px;
   font-family: 'Space Grotesk', sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.5);
+  opacity: 0.6;
   animation: drift var(--duration) linear infinite;
   white-space: nowrap;
+  /* Removed backdrop-filter for performance */
 }
 
 .stat-bubble.viral {
@@ -869,20 +834,13 @@ img {
   color: var(--accent-blue);
 }
 
+/* Optimized drift animation - no opacity changes for better performance */
 @keyframes drift {
   0% {
     left: var(--start-x);
-    opacity: 0;
-  }
-  5% {
-    opacity: 0.6;
-  }
-  95% {
-    opacity: 0.6;
   }
   100% {
     left: var(--end-x);
-    opacity: 0;
   }
 }
 
@@ -965,16 +923,14 @@ img {
   width: 1px;
   height: 40px;
   background: linear-gradient(to bottom, var(--accent-blue), transparent);
-  animation: scrollPulse 2s ease-in-out infinite;
+  animation: scrollPulse 2s linear infinite;
 }
 
 @keyframes scrollPulse {
   0%, 100% {
-    opacity: 0.3;
     transform: scaleY(1);
   }
   50% {
-    opacity: 1;
     transform: scaleY(1.2);
   }
 }
@@ -1416,18 +1372,18 @@ section {
   object-position: top center;
 }
 
-/* Logo frames for Dropship, Kirgo */
+/* Logo frames for Dropship, Kirgo - dark bg for better logo visibility */
 .client-photo-frame.logo-frame {
-  background: rgba(255, 255, 255, 0.05);
+  background: #111111;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem;
+  padding: 30px;
 }
 
 .client-photo-frame.logo-frame img {
-  width: 70%;
-  height: 70%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   object-position: center;
 }
