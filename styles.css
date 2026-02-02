@@ -1960,9 +1960,27 @@ section {
 
 /* Mobile */
 @media (max-width: 768px) {
-  /* Body padding for bottom nav - must be above the fixed bar */
+  /* Body padding for fixed nav at top and bottom nav at bottom */
   body {
+    padding-top: 65px;
     padding-bottom: 70px;
+  }
+
+  /* Fixed navbar at top - always visible */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    background: #0a0a0a;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .navbar.scrolled {
+    background: #0a0a0a;
+    padding: 0.75rem 0;
   }
 
   section {
