@@ -48,8 +48,39 @@
 
   <!-- Hero Section - Animated Dashboard -->
   <section class="hero-dashboard" id="hero-dashboard">
+    <!-- Animated Gradient Mesh Background -->
+    <div class="gradient-mesh"></div>
+
+    <!-- Glowing Orbs -->
+    <div class="glowing-orbs">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="orb orb-4"></div>
+    </div>
+
     <!-- Grid Pattern Background -->
     <div class="dashboard-grid"></div>
+
+    <!-- Scan Lines Overlay -->
+    <div class="scan-lines"></div>
+
+    <!-- Constellation Lines SVG -->
+    <svg class="constellation-lines" viewBox="0 0 1200 800" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="lineGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#00A3FF;stop-opacity:0.3" />
+          <stop offset="100%" style="stop-color:#7B2FFF;stop-opacity:0.1" />
+        </linearGradient>
+      </defs>
+      <!-- Connection lines between floating cards -->
+      <line class="constellation-line" x1="10%" y1="18%" x2="85%" y2="15%" stroke="url(#lineGrad1)" stroke-width="1"/>
+      <line class="constellation-line" x1="85%" y1="15%" x2="88%" y2="55%" stroke="url(#lineGrad1)" stroke-width="1"/>
+      <line class="constellation-line" x1="88%" y1="55%" x2="30%" y2="72%" stroke="url(#lineGrad1)" stroke-width="1"/>
+      <line class="constellation-line" x1="30%" y1="72%" x2="8%" y2="50%" stroke="url(#lineGrad1)" stroke-width="1"/>
+      <line class="constellation-line" x1="8%" y1="50%" x2="10%" y2="18%" stroke="url(#lineGrad1)" stroke-width="1"/>
+      <line class="constellation-line" x1="10%" y1="18%" x2="70%" y2="75%" stroke="url(#lineGrad1)" stroke-width="1"/>
+    </svg>
 
     <!-- Animated Growth Line SVG -->
     <svg class="growth-line" viewBox="0 0 1200 400" preserveAspectRatio="none">
@@ -70,27 +101,31 @@
       <path class="growth-path" d="M0,350 Q200,320 400,280 T800,180 T1200,50" fill="none" stroke="url(#lineGradient)" stroke-width="2" filter="url(#glow)"/>
     </svg>
 
-    <!-- Featured Proof Card (YouTube) - Left Side -->
-    <div class="hero-proof-featured" id="hero-proof-featured">
-      <div class="proof-card-large">
-        <img src="assets/results/yt_184m_views.jpg" alt="184M YouTube Views - Real Proof" loading="eager">
-        <div class="proof-card-label">184M Views on ONE Channel</div>
-      </div>
-    </div>
-
-    <!-- Floating Proof Cards (smaller, background) -->
+    <!-- Floating Proof Cards - EVENLY DISTRIBUTED -->
     <div class="floating-cards" id="floating-cards">
-      <div class="floating-card" style="--delay: 0.5s; --x: 78%; --y: 12%; --rotate: 4deg;">
+      <!-- Top Left -->
+      <div class="floating-card card-lg" style="--delay: 0s; --x: 8%; --y: 15%; --rotate: -4deg; --float-speed: 7s;">
+        <img src="assets/results/yt_184m_views.jpg" alt="184M YouTube Views" loading="eager">
+      </div>
+      <!-- Top Right -->
+      <div class="floating-card card-md" style="--delay: 0.5s; --x: 82%; --y: 12%; --rotate: 5deg; --float-speed: 6s;">
         <img src="assets/results/ig_88m_spike.jpeg" alt="88M Spike" loading="eager">
       </div>
-      <div class="floating-card" style="--delay: 1s; --x: 88%; --y: 50%; --rotate: -3deg;">
+      <!-- Middle Left -->
+      <div class="floating-card card-sm" style="--delay: 1s; --x: 5%; --y: 52%; --rotate: 3deg; --float-speed: 8s;">
         <img src="assets/results/tiktok_17m_viral.png" alt="17M Viral" loading="eager">
       </div>
-      <div class="floating-card" style="--delay: 1.5s; --x: 80%; --y: 75%; --rotate: 5deg;">
+      <!-- Middle Right -->
+      <div class="floating-card card-md" style="--delay: 1.5s; --x: 85%; --y: 48%; --rotate: -3deg; --float-speed: 5s;">
         <img src="assets/results/ig_27m_reel.png" alt="27M Reel" loading="eager">
       </div>
-      <div class="floating-card mobile-hide" style="--delay: 2s; --x: 70%; --y: 38%; --rotate: -2deg;">
+      <!-- Bottom Center-Left -->
+      <div class="floating-card card-sm" style="--delay: 2s; --x: 28%; --y: 70%; --rotate: 4deg; --float-speed: 9s;">
         <img src="assets/results/tiktok_40m_views.png" alt="40M Views" loading="eager">
+      </div>
+      <!-- Bottom Center-Right -->
+      <div class="floating-card card-sm mobile-hide" style="--delay: 2.5s; --x: 68%; --y: 72%; --rotate: -5deg; --float-speed: 7s;">
+        <img src="assets/results/ig_26m_views.jpeg" alt="26M Views" loading="eager">
       </div>
     </div>
 

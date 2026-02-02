@@ -535,10 +535,177 @@ img {
   min-height: 100vh;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
+  background: #050505;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* Animated Gradient Mesh Background (lava lamp effect) */
+.gradient-mesh {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(0, 50, 120, 0.4) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(60, 0, 100, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 50% at 50% 80%, rgba(0, 80, 150, 0.25) 0%, transparent 50%);
+  z-index: 0;
+  animation: meshShift 20s ease-in-out infinite;
+}
+
+@keyframes meshShift {
+  0%, 100% {
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 40%, rgba(0, 50, 120, 0.4) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 40% at 80% 60%, rgba(60, 0, 100, 0.3) 0%, transparent 50%),
+      radial-gradient(ellipse 70% 50% at 50% 80%, rgba(0, 80, 150, 0.25) 0%, transparent 50%);
+  }
+  33% {
+    background:
+      radial-gradient(ellipse 70% 60% at 70% 30%, rgba(0, 60, 130, 0.35) 0%, transparent 50%),
+      radial-gradient(ellipse 80% 50% at 30% 70%, rgba(80, 0, 120, 0.3) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 40% at 60% 50%, rgba(0, 100, 180, 0.2) 0%, transparent 50%);
+  }
+  66% {
+    background:
+      radial-gradient(ellipse 60% 50% at 40% 60%, rgba(0, 70, 140, 0.4) 0%, transparent 50%),
+      radial-gradient(ellipse 70% 45% at 70% 30%, rgba(50, 0, 90, 0.35) 0%, transparent 50%),
+      radial-gradient(ellipse 80% 55% at 20% 80%, rgba(0, 60, 120, 0.25) 0%, transparent 50%);
+  }
+}
+
+/* Glowing Orbs */
+.glowing-orbs {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.4;
+}
+
+.orb-1 {
+  width: 300px;
+  height: 300px;
+  background: rgba(0, 163, 255, 0.3);
+  top: 10%;
+  left: 10%;
+  animation: orbFloat1 25s ease-in-out infinite;
+}
+
+.orb-2 {
+  width: 200px;
+  height: 200px;
+  background: rgba(123, 47, 255, 0.25);
+  top: 60%;
+  right: 15%;
+  animation: orbFloat2 30s ease-in-out infinite;
+}
+
+.orb-3 {
+  width: 250px;
+  height: 250px;
+  background: rgba(0, 100, 200, 0.2);
+  bottom: 20%;
+  left: 30%;
+  animation: orbFloat3 20s ease-in-out infinite;
+}
+
+.orb-4 {
+  width: 150px;
+  height: 150px;
+  background: rgba(100, 0, 180, 0.2);
+  top: 30%;
+  right: 25%;
+  animation: orbFloat4 22s ease-in-out infinite;
+}
+
+@keyframes orbFloat1 {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(50px, 30px); }
+  50% { transform: translate(20px, 60px); }
+  75% { transform: translate(-30px, 20px); }
+}
+
+@keyframes orbFloat2 {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-40px, -20px); }
+  50% { transform: translate(-60px, 30px); }
+  75% { transform: translate(-20px, -40px); }
+}
+
+@keyframes orbFloat3 {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(30px, -40px); }
+  50% { transform: translate(60px, -20px); }
+  75% { transform: translate(20px, 30px); }
+}
+
+@keyframes orbFloat4 {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-30px, 40px); }
+  50% { transform: translate(20px, 50px); }
+  75% { transform: translate(40px, -20px); }
+}
+
+/* Scan Lines Overlay */
+.scan-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Constellation Lines */
+.constellation-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.constellation-line {
+  opacity: 0.15;
+  stroke-dasharray: 5 10;
+  animation: constellationPulse 4s ease-in-out infinite;
+}
+
+.constellation-line:nth-child(2) { animation-delay: 0.5s; }
+.constellation-line:nth-child(3) { animation-delay: 1s; }
+.constellation-line:nth-child(4) { animation-delay: 1.5s; }
+.constellation-line:nth-child(5) { animation-delay: 2s; }
+.constellation-line:nth-child(6) { animation-delay: 2.5s; }
+
+@keyframes constellationPulse {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.25; }
 }
 
 /* Grid Pattern Background */
@@ -551,7 +718,7 @@ img {
   background-image:
     radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0);
   background-size: 40px 40px;
-  z-index: 1;
+  z-index: 3;
 }
 
 /* Animated Growth Line */
@@ -599,7 +766,7 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 3;
+  z-index: 5;
   pointer-events: none;
 }
 
@@ -607,17 +774,40 @@ img {
   position: absolute;
   left: var(--x);
   top: var(--y);
-  width: 180px;
+  width: 160px;
   transform: rotate(var(--rotate));
-  opacity: 0.35;
-  animation: float 6s ease-in-out infinite;
+  opacity: 0.5;
+  animation: float var(--float-speed, 6s) ease-in-out infinite;
   animation-delay: var(--delay);
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 20px rgba(0,163,255,0.1);
+  border: 1px solid rgba(0, 163, 255, 0.2);
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.5),
+    0 0 30px rgba(0, 163, 255, 0.15),
+    inset 0 0 20px rgba(0, 163, 255, 0.05);
   backdrop-filter: blur(4px);
   transition: opacity 0.5s ease;
+}
+
+/* Different card sizes */
+.floating-card.card-lg {
+  width: 220px;
+  opacity: 0.6;
+  box-shadow:
+    0 12px 40px rgba(0,0,0,0.6),
+    0 0 50px rgba(0, 163, 255, 0.2),
+    inset 0 0 30px rgba(0, 163, 255, 0.05);
+}
+
+.floating-card.card-md {
+  width: 180px;
+  opacity: 0.55;
+}
+
+.floating-card.card-sm {
+  width: 140px;
+  opacity: 0.45;
 }
 
 .floating-card img {
@@ -784,16 +974,40 @@ img {
 @media (max-width: 768px) {
   .hero-dashboard {
     min-height: 100vh;
-    padding: 6rem 0 4rem;
+    padding: 6rem 0 2rem;
   }
 
   .floating-card {
-    width: 120px;
+    opacity: 0.25;
+  }
+
+  .floating-card.card-lg {
+    width: 140px;
+    opacity: 0.35;
+  }
+
+  .floating-card.card-md {
+    width: 110px;
+    opacity: 0.3;
+  }
+
+  .floating-card.card-sm {
+    width: 90px;
     opacity: 0.25;
   }
 
   .floating-card.mobile-hide {
     display: none;
+  }
+
+  /* Hide some orbs on mobile */
+  .orb-3, .orb-4 {
+    display: none;
+  }
+
+  .orb-1, .orb-2 {
+    filter: blur(40px);
+    opacity: 0.3;
   }
 
   .stat-bubble {
@@ -827,65 +1041,12 @@ img {
   }
 }
 
-/* Featured Proof Card (Large YouTube screenshot) */
-.hero-proof-featured {
-  position: absolute;
-  left: 5%;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 5;
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.proof-card-large {
-  width: 320px;
-  background: var(--bg-card);
-  border: 1px solid rgba(0, 163, 255, 0.3);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 163, 255, 0.2);
-  animation: floatLarge 8s ease-in-out infinite;
-}
-
-.proof-card-large img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.proof-card-label {
-  padding: 0.75rem 1rem;
-  background: rgba(0, 163, 255, 0.1);
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--accent-blue);
-  text-align: center;
-}
-
-@keyframes floatLarge {
-  0%, 100% {
-    transform: translateY(-50%) rotate(-2deg);
-  }
-  50% {
-    transform: translateY(calc(-50% - 15px)) rotate(-2deg);
-  }
-}
-
 /* Parallax scroll fade effect */
 .hero-dashboard.scrolled .floating-cards,
-.hero-dashboard.scrolled .stat-bubbles,
-.hero-dashboard.scrolled .hero-proof-featured {
+.hero-dashboard.scrolled .stat-bubbles {
   opacity: 0;
   transform: translateY(-50px);
   transition: all 0.5s ease;
-}
-
-/* Mobile: hide featured proof card */
-@media (max-width: 1024px) {
-  .hero-proof-featured {
-    display: none;
-  }
 }
 
 /* ==================== SOCIAL PROOF TICKER ==================== */
@@ -956,10 +1117,12 @@ img {
   border-top: var(--border-subtle);
   border-bottom: var(--border-subtle);
   overflow: hidden;
+  margin-top: 0;
+  padding: 0;
 }
 
 .ticker-row {
-  padding: 0.75rem 0;
+  padding: 0.4rem 0;
   overflow: hidden;
 }
 
@@ -992,7 +1155,16 @@ img {
 
 /* ==================== SECTIONS ==================== */
 section {
-  padding: 6rem 0;
+  padding: 3rem 0;
+}
+
+/* Specific tight sections */
+.ticker-dual {
+  padding: 0;
+}
+
+.results-carousel {
+  padding: 2rem 0;
 }
 
 .section-header {
@@ -1116,7 +1288,7 @@ section {
 /* ==================== RESULTS CAROUSEL ==================== */
 .results-carousel {
   overflow: hidden;
-  padding: 1rem 0;
+  padding: 1.5rem 0;
 }
 
 .results-track {
@@ -1434,7 +1606,7 @@ section {
 /* ==================== CTA SECTION ==================== */
 .cta-section {
   position: relative;
-  padding: 8rem 0;
+  padding: 4rem 0;
   text-align: center;
   overflow: hidden;
 }
@@ -1669,7 +1841,11 @@ section {
   }
 
   section {
-    padding: 4rem 0;
+    padding: 2.5rem 0;
+  }
+
+  .ticker-row {
+    padding: 0.3rem 0;
   }
 
   .container {
