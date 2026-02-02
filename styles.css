@@ -567,6 +567,7 @@ section {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top center;
   transition: var(--transition-medium);
 }
 
@@ -1135,9 +1136,9 @@ section {
 
 /* Mobile */
 @media (max-width: 768px) {
-  /* Body padding for bottom nav */
+  /* Body padding for bottom nav - must be above the fixed bar */
   body {
-    padding-bottom: 80px;
+    padding-bottom: 70px;
   }
 
   section {
@@ -1148,7 +1149,7 @@ section {
     padding: 0 1.25rem;
   }
 
-  /* Hide hamburger, show bottom nav */
+  /* Hide hamburger, show bottom nav instead */
   .nav-links {
     display: none;
   }
@@ -1163,12 +1164,6 @@ section {
 
   .mobile-menu {
     display: none !important;
-  }
-
-  .bottom-nav {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
   }
 
   /* Hero fonts smaller */
@@ -1313,9 +1308,9 @@ section {
     gap: 2rem;
   }
 
-  /* Footer needs extra bottom padding */
+  /* Footer needs extra bottom padding for fixed bottom nav */
   .footer {
-    padding-bottom: 5rem;
+    padding-bottom: 6rem;
   }
 
   .btn {
@@ -1403,12 +1398,22 @@ section {
   position: fixed;
   bottom: 0;
   left: 0;
-  right: 0;
-  background: rgba(10, 10, 10, 0.95);
+  width: 100%;
+  background: rgba(10, 10, 10, 0.98);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-top: 1px solid var(--glass-border);
-  z-index: 1000;
+  z-index: 9999;
   padding: 0.5rem 0 calc(0.5rem + env(safe-area-inset-bottom));
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* Show bottom nav on mobile */
+@media (max-width: 768px) {
+  .bottom-nav {
+    display: flex;
+  }
 }
 
 .bottom-nav-item {
