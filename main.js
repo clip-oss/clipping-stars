@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initLiveCounter();
   initApplyModal();
   initFaqToggles();
+  initStepAnimations();
   // Parallax removed - floating cards should always stay visible
 });
 
@@ -193,6 +194,29 @@ function initLiveCounter() {
 }
 
 // Dashboard parallax removed - floating cards should always stay visible
+
+// ==================== HOW IT WORKS SCROLL ANIMATION ====================
+function initStepAnimations() {
+  const steps = document.querySelectorAll('.step');
+  if (!steps.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Stagger the animations based on index
+        const index = Array.from(steps).indexOf(entry.target);
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, index * 150);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.2
+  });
+
+  steps.forEach(step => observer.observe(step));
+}
 
 // ==================== FAQ TOGGLES ====================
 function initFaqToggles() {
