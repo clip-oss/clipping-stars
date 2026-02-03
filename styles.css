@@ -1718,13 +1718,7 @@ section {
 }
 
 .timeline-number {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 4rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.05);
-  position: absolute;
-  left: -20px;
-  top: -20px;
+  display: none;
 }
 
 .timeline-icon {
