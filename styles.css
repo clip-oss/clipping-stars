@@ -1481,7 +1481,12 @@ section {
   display: flex;
   margin: 0;
   padding: 0;
-  animation: scrollResults 45s linear infinite;
+  animation: scrollResults 60s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
 }
 
 .results-track.reverse {
@@ -1506,7 +1511,7 @@ section {
 
 @keyframes scrollResults {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  100% { transform: translateX(-33.33%); }
 }
 
 .see-all-link {
