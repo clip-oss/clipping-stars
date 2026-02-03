@@ -302,7 +302,7 @@ function initApplyModal() {
       };
 
       try {
-        await fetch('https://script.google.com/macros/s/AKfycbwGdnctsSjIeyX8zLGOY81KDe1Hd5HuOJKMVhpfnEXuiHRKVN6FwICH8DxyCBSfNFxu/exec', {
+        await fetch('https://script.google.com/macros/s/AKfycbyjI3Nrde8SYB0JdkDTGfqsW8AtIdjBfa-2PvgMwqoJRJNHs0kRii9xZDyzdO-zGV-A/exec', {
           method: 'POST',
           mode: 'no-cors',
           headers: {
