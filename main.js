@@ -285,19 +285,45 @@ function initApplyModal() {
     }
   });
 
-  // Form submission
+  // Form submission — send to Google Sheets
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // Hide form, show success message
-      form.style.display = 'none';
-      if (successMsg) successMsg.style.display = 'block';
+      const submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
 
-      // Auto-close after 3 seconds
-      setTimeout(() => {
-        closeModal();
-      }, 3000);
+      const data = {
+        name: form.querySelector('input[name="name"]').value,
+        email: form.querySelector('input[name="email"]').value,
+        phone: form.querySelector('input[name="phone"]').value,
+        message: form.querySelector('textarea[name="message"]').value
+      };
+
+      try {
+        await fetch('https://script.google.com/macros/s/AKfycbwGdnctsSjIeyX8zLGOY81KDe1Hd5HuOJKMVhpfnEXuiHRKVN6FwICH8DxyCBSfNFxu/exec', {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+
+        form.style.display = 'none';
+        if (successMsg) successMsg.style.display = 'block';
+
+        // Auto-close after 3 seconds
+        setTimeout(() => {
+          closeModal();
+        }, 3000);
+
+      } catch (error) {
+        alert('Something went wrong. Please try again.');
+        submitBtn.textContent = 'Submit Application';
+        submitBtn.disabled = false;
+      }
     });
   }
 }
