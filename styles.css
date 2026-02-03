@@ -983,10 +983,10 @@ img {
   .floating-card.card-featured {
     display: block !important;
     position: absolute;
-    width: 140px !important;
+    width: 220px !important;
     opacity: 0.5 !important;
-    top: 6% !important;
-    left: -15px !important;
+    top: 4% !important;
+    left: -10px !important;
     right: auto !important;
     transform: rotate(-5deg) !important;
     z-index: 1;
