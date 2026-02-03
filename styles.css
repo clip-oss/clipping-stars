@@ -1473,7 +1473,7 @@ section {
   padding: 0;
 }
 
-.results-carousel:nth-child(2) {
+.results-carousel + .results-carousel {
   margin-top: 40px;
 }
 
