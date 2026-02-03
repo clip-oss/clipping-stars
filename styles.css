@@ -1546,14 +1546,8 @@ section {
 
 .results-track {
   display: flex;
-  margin: 0;
-  padding: 0;
-  animation: scrollResults 60s linear infinite;
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  perspective: 1000px;
-  -webkit-perspective: 1000px;
+  width: max-content;
+  animation: resultsScroll 80s linear infinite;
 }
 
 .results-track.reverse {
@@ -1576,9 +1570,9 @@ section {
   border-radius: 12px;
 }
 
-@keyframes scrollResults {
+@keyframes resultsScroll {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-33.33%); }
+  100% { transform: translateX(-25%); }
 }
 
 .see-all-link {
@@ -2187,7 +2181,7 @@ section {
 
   /* Faster results carousel on mobile */
   .results-track {
-    animation-duration: 30s;
+    animation-duration: 40s;
   }
 
   /* Results carousel smaller on mobile */
