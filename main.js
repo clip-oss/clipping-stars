@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothPageTransition();
   initLiveCounter();
   initApplyModal();
+  initFaqToggles();
   // Parallax removed - floating cards should always stay visible
 });
 
@@ -192,6 +193,16 @@ function initLiveCounter() {
 }
 
 // Dashboard parallax removed - floating cards should always stay visible
+
+// ==================== FAQ TOGGLES ====================
+function initFaqToggles() {
+  document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+      const item = question.parentElement;
+      item.classList.toggle('active');
+    });
+  });
+}
 
 // ==================== APPLY MODAL ====================
 function initApplyModal() {
