@@ -2901,6 +2901,76 @@ section {
   opacity: 0.7;
 }
 
+/* ==================== ABOUT DEFINITION (GEO) ==================== */
+.about-definition {
+  padding: 60px 20px;
+  background: var(--bg-primary);
+}
+
+.about-definition .container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-definition h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 24px;
+}
+
+.about-definition p {
+  color: var(--text-secondary);
+  font-size: 17px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+/* ==================== FAQ PAGE ==================== */
+.faq-page-section {
+  padding-top: 40px;
+}
+
+.faq-page-section .faq-container {
+  max-width: 800px;
+}
+
+.faq-category-heading {
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 48px;
+  margin-bottom: 8px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(0, 163, 255, 0.3);
+  background: var(--gradient-main);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.faq-category-heading:first-child {
+  margin-top: 0;
+}
+
+.faq-page-section .faq-question h3 {
+  font-size: 17px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.faq-section .see-all-link {
+  display: block;
+  text-align: center;
+  margin-top: 32px;
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.faq-section .see-all-link:hover {
+  opacity: 0.8;
+}
+
 /* ==================== APPLY MODAL ==================== */
 .apply-modal {
   display: none;
